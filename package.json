@@ -1,0 +1,38 @@
+{
+  "name": "PetSync",
+  "description": "An Android application for tracking pet care",
+  "version": "1.0.0",
+  "scripts": {
+    "simulate": "cd C:\\Users\\%USERNAME%\\AppData\\Local\\Android\\Sdk\\tools && emulator -avd Galaxy_S7_API_23",
+    "start": "react-native run-android",
+    "devtools": "react-devtools",
+    "watch": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "16.4.1",
+    "react-native": "^0.55.4"
+  },
+  "devDependencies": {
+    "babel-jest": "23.4.2",
+    "babel-preset-react-native": "^4.0.0",
+    "enzyme": "^3.4.0",
+    "enzyme-adapter-react-16": "^1.2.0",
+    "jest": "23.4.2",
+    "native-base": "^2.7.2",
+    "react-addons-test-utils": "^15.6.2",
+    "react-devtools": "^3.2.3",
+    "react-dom": "^16.4.2",
+    "react-native-svg": "^6.5.2",
+    "react-test-renderer": "16.4.1"
+  },
+  "jest": {
+    "preset": "react-native",
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|react-navigation)/"
+    ]
+  }
+}
