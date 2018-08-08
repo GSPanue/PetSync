@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class Interface extends Component {
+export default class Interface extends React.Component {
     render() {
         return (
             <View style={styles.container}>

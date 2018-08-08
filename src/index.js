@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {AppRegistry} from 'react-native';
 import {StyleProvider} from 'native-base';
 
@@ -9,7 +9,7 @@ import lightTheme from './themes/variables/light';
 
 import Interface from './components/Interface';
 
-export default class App extends Component {
+export default class App extends React.Component {
     render() {
         return (
             <StyleProvider style={getTheme(lightTheme)}>
