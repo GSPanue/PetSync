@@ -1,13 +1,15 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 
 import styles from './styles';
+
+import Logo from '../../components/Logo/Logo';
 
 export class Splash extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Placeholder</Text>
+                <Logo inactive={false} enableFadeAnimation={true}/>
             </View>
         );
     }
