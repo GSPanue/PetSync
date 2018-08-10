@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator} from 'react-navigation';
+import {createStackNavigator, createSwitchNavigator} from 'react-navigation';
 
 import Splash from '../screens/Splash';
 
@@ -8,5 +8,16 @@ export const SplashStack = createStackNavigator({
         screen: Splash
     }
 }, {
-    headerMode: 'none'
+    headerMode: 'none',
+    cardStyle: {
+        backgroundColor: 'transparent'
+    }
 });
+
+export const createRootNavigator = () => {
+    return createSwitchNavigator({
+        Splash: {
+            screen: SplashStack
+        }
+    });
+};
