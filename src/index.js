@@ -1,6 +1,9 @@
 import React from 'react';
+import {Provider} from 'react-redux';
 import {StyleProvider} from 'native-base';
 import {createRootNavigator} from './config/routes';
+
+import store from './config/store';
 
 import getTheme from './themes/components/index';
 import lightTheme from './themes/variables/light';
@@ -10,9 +13,11 @@ export class App extends React.Component {
         const Layout = createRootNavigator();
 
         return (
-            <StyleProvider style={getTheme(lightTheme)}>
-                <Layout/>
-            </StyleProvider>
+            <Provider store={store}>
+                <StyleProvider style={getTheme(lightTheme)}>
+                    <Layout/>
+                </StyleProvider>
+            </Provider>
         );
     }
 }
