@@ -1,18 +1,17 @@
 import React from 'react';
-import {configure, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {shallow} from 'enzyme';
 
 import {App} from '..';
-
-configure({
-    adapter: new Adapter()
-});
 
 describe('Component: App', () => {
     const wrapper = shallow(<App/>);
 
     it('should render a single App component', () => {
         expect(wrapper).toHaveLength(1);
+    });
+
+    it('should contain a Provider component', () => {
+        expect(wrapper.find('Provider')).toHaveLength(1);
     });
 
     it('should contain a StyleProvider component', () => {
