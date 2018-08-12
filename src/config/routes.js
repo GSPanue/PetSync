@@ -19,5 +19,7 @@ export const createRootNavigator = () => {
         Splash: {
             screen: SplashStack
         }
+    }, {
+        initialRouteName: 'Splash'
     });
 };
