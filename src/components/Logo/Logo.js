@@ -8,7 +8,7 @@ import Svg, {
     G
 } from 'react-native-svg';
 
-export default class Logo extends React.Component {
+export default class Logo extends React.PureComponent {
     static propTypes = {
         height: PropTypes.string.isRequired,
         width: PropTypes.string.isRequired,
