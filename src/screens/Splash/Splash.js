@@ -11,9 +11,9 @@ import Logo from '../../components/Logo';
 
 export class Splash extends React.Component {
     static propTypes = {
-        animationType: allowNullPropType(PropTypes.string.isRequired),
-        animationComplete: PropTypes.bool.isRequired,
-        changeAnimation: PropTypes.func.isRequired
+        animationType: allowNullPropType(PropTypes.string),
+        animationComplete: PropTypes.bool,
+        changeAnimation: PropTypes.func
     };
 
     componentDidMount() {
