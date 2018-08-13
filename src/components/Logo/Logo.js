@@ -10,17 +10,15 @@ import Svg, {
 
 export default class Logo extends React.Component {
     static propTypes = {
-        height: PropTypes.string,
-        width: PropTypes.string,
+        height: PropTypes.string.isRequired,
+        width: PropTypes.string.isRequired,
         inactive: PropTypes.bool,
         disableTransparency: PropTypes.bool
     };
 
     static defaultProps = {
-        height: '125',
-        width: '125',
         inactive: false,
-        disableTransparency: true
+        disableTransparency: false
     };
 
     render() {
