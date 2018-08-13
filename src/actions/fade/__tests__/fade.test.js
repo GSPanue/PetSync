@@ -1,16 +1,16 @@
 import * as actions from '../fade';
 import {
-    ADD_ANIMATION,
-    REMOVE_ANIMATION,
-    CHANGE_ANIMATION,
-    COMPLETE_ANIMATION
+    ADD_FADE_ANIMATION,
+    REMOVE_FADE_ANIMATION,
+    CHANGE_FADE_ANIMATION,
+    COMPLETE_FADE_ANIMATION
 } from '../../../constants/actionTypes';
 
 describe('Actions: Fade', () => {
-    it('should create an action to add an animation', () => {
+    it('should create an action to add a fade animation', () => {
         const id = 'id', value = 'value', type = 'type';
         const expectedAction = {
-            type: ADD_ANIMATION,
+            type: ADD_FADE_ANIMATION,
             payload: {
                 id,
                 value,
@@ -18,43 +18,43 @@ describe('Actions: Fade', () => {
             }
         };
 
-        expect(actions.addAnimation(id, value, type)).toEqual(expectedAction);
+        expect(actions.addFadeAnimation(id, value, type)).toEqual(expectedAction);
     });
 
-    it('should create an action to remove an animation', () => {
+    it('should create an action to remove a fade animation', () => {
         const id = 'id';
         const expectedAction = {
-            type: REMOVE_ANIMATION,
+            type: REMOVE_FADE_ANIMATION,
             payload: {
                 id
             }
         };
 
-        expect(actions.removeAnimation(id)).toEqual(expectedAction);
+        expect(actions.removeFadeAnimation(id)).toEqual(expectedAction);
     });
 
-    it('should create an action to change an animation', () => {
+    it('should create an action to change a fade animation', () => {
         const id = 'id', type = 'type';
         const expectedAction = {
-            type: CHANGE_ANIMATION,
+            type: CHANGE_FADE_ANIMATION,
             payload: {
                 id,
                 type
             }
         };
 
-        expect(actions.changeAnimation(id, type)).toEqual(expectedAction);
+        expect(actions.changeFadeAnimation(id, type)).toEqual(expectedAction);
     });
 
-    it('should create an action to complete an animation', () => {
+    it('should create an action to complete a fade animation', () => {
         const id = 'id';
         const expectedAction = {
-            type: COMPLETE_ANIMATION,
+            type: COMPLETE_FADE_ANIMATION,
             payload: {
                 id
             }
         };
 
-        expect(actions.completeAnimation(id)).toEqual(expectedAction);
+        expect(actions.completeFadeAnimation(id)).toEqual(expectedAction);
     });
 });

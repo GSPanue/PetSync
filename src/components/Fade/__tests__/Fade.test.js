@@ -9,12 +9,12 @@ describe('Component: Fade', () => {
         id: 'id',
         styles: null,
         children: <Text>Child</Text>,
-        animationValue: null,
-        animationType: null,
-        animationComplete: false,
-        addAnimation: () => {},
-        removeAnimation: () => {},
-        completeAnimation: () => {}
+        fadeValue: null,
+        fadeType: null,
+        fadeComplete: false,
+        addFadeAnimation: () => {},
+        removeFadeAnimation: () => {},
+        completeFadeAnimation: () => {}
     };
 
     it('should render a single Fade component', () => {
@@ -35,35 +35,35 @@ describe('Component: Fade', () => {
         expect(wrapper.find('Text')).toHaveLength(1);
     });
 
-    it('should have props for id, styles, children, animationValue, animationType, and animationComplete', () => {
+    it('should have props for id, styles, children, fadeValue, fadeType, and fadeComplete', () => {
         const wrapper = shallow(<Fade {...minProps}/>);
         const instance = wrapper.instance();
 
         expect(instance.props.id).toBeDefined();
         expect(instance.props.styles).toBeDefined();
         expect(instance.props.children).toBeDefined();
-        expect(instance.props.animationValue).toBeDefined();
-        expect(instance.props.animationType).toBeDefined();
-        expect(instance.props.animationComplete).toBeDefined();
+        expect(instance.props.fadeValue).toBeDefined();
+        expect(instance.props.fadeType).toBeDefined();
+        expect(instance.props.fadeComplete).toBeDefined();
     });
 
-    it('should have props for addAnimation, removeAnimation, and completeAnimation', () => {
+    it('should have props for addFadeAnimation, removeFadeAnimation, and completeFadeAnimation', () => {
         const wrapper = shallow(<Fade {...minProps}/>);
         const instance = wrapper.instance();
 
-        expect(instance.props.addAnimation).toBeDefined();
-        expect(instance.props.removeAnimation).toBeDefined();
-        expect(instance.props.completeAnimation).toBeDefined();
+        expect(instance.props.addFadeAnimation).toBeDefined();
+        expect(instance.props.removeFadeAnimation).toBeDefined();
+        expect(instance.props.completeFadeAnimation).toBeDefined();
     });
 
     describe('Method: componentWillMount', () => {
-        it('should call addAnimation', () => {
-            const addAnimation = jest.fn();
-            expect(addAnimation).toHaveBeenCalledTimes(0);
+        it('should call addFadeAnimation', () => {
+            const addFadeAnimation = jest.fn();
+            expect(addFadeAnimation).toHaveBeenCalledTimes(0);
 
-            const wrapper = shallow(<Fade {...minProps} addAnimation={addAnimation}/>);
+            const wrapper = shallow(<Fade {...minProps} addFadeAnimation={addFadeAnimation}/>);
 
-            expect(addAnimation).toHaveBeenCalledTimes(1);
+            expect(addFadeAnimation).toHaveBeenCalledTimes(1);
         });
     });
 });

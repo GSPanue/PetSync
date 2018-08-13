@@ -1,8 +1,8 @@
 import {
-    ADD_ANIMATION,
-    REMOVE_ANIMATION,
-    CHANGE_ANIMATION,
-    COMPLETE_ANIMATION
+    ADD_FADE_ANIMATION,
+    REMOVE_FADE_ANIMATION,
+    CHANGE_FADE_ANIMATION,
+    COMPLETE_FADE_ANIMATION
 } from '../../constants/actionTypes';
 
 const {fromJS} = require('immutable');
@@ -17,24 +17,24 @@ const initialState = fromJS({
 
 const fade = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_ANIMATION:
+        case ADD_FADE_ANIMATION:
             return state
                 .setIn([action.payload.id, 'value'], action.payload.value)
                 .setIn([action.payload.id, 'type'], action.payload.type)
                 .setIn([action.payload.id, 'complete'], false);
 
-        case REMOVE_ANIMATION:
+        case REMOVE_FADE_ANIMATION:
             return state
                 .setIn([action.payload.id, 'value'], null)
                 .setIn([action.payload.id, 'type'], null)
                 .setIn([action.payload.id, 'complete'], false);
 
-        case CHANGE_ANIMATION:
+        case CHANGE_FADE_ANIMATION:
             return state
                 .setIn([action.payload.id, 'type'], action.payload.type)
                 .setIn([action.payload.id, 'complete'], false);
 
-        case COMPLETE_ANIMATION:
+        case COMPLETE_FADE_ANIMATION:
             return state
                 .setIn([action.payload.id, 'complete'], true);
 

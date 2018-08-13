@@ -1,13 +1,13 @@
 import {
-    ADD_ANIMATION,
-    REMOVE_ANIMATION,
-    CHANGE_ANIMATION,
-    COMPLETE_ANIMATION
+    ADD_FADE_ANIMATION,
+    REMOVE_FADE_ANIMATION,
+    CHANGE_FADE_ANIMATION,
+    COMPLETE_FADE_ANIMATION
 } from '../../constants/actionTypes';
 
-export const addAnimation = (id, value, type) => {
+export const addFadeAnimation = (id, value, type) => {
     return {
-        type: ADD_ANIMATION,
+        type: ADD_FADE_ANIMATION,
         payload: {
             id,
             value,
@@ -16,18 +16,18 @@ export const addAnimation = (id, value, type) => {
     }
 };
 
-export const removeAnimation = (id) => {
+export const removeFadeAnimation = (id) => {
     return {
-        type: REMOVE_ANIMATION,
+        type: REMOVE_FADE_ANIMATION,
         payload: {
             id
         }
     }
 };
 
-export const changeAnimation = (id, type) => {
+export const changeFadeAnimation = (id, type) => {
     return {
-        type: CHANGE_ANIMATION,
+        type: CHANGE_FADE_ANIMATION,
         payload: {
             id,
             type
@@ -35,9 +35,9 @@ export const changeAnimation = (id, type) => {
     }
 };
 
-export const completeAnimation = (id) => {
+export const completeFadeAnimation = (id) => {
     return {
-        type: COMPLETE_ANIMATION,
+        type: COMPLETE_FADE_ANIMATION,
         payload: {
             id
         }

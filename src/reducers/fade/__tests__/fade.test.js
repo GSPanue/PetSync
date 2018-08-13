@@ -1,8 +1,8 @@
 import {
-    ADD_ANIMATION,
-    REMOVE_ANIMATION,
-    CHANGE_ANIMATION,
-    COMPLETE_ANIMATION
+    ADD_FADE_ANIMATION,
+    REMOVE_FADE_ANIMATION,
+    CHANGE_FADE_ANIMATION,
+    COMPLETE_FADE_ANIMATION
 } from '../../../constants/actionTypes';
 import reducer from '../fade';
 
@@ -21,7 +21,7 @@ describe('Reducer: Fade', () => {
         expect(reducer(undefined, {})).toEqual(expectedState);
     });
 
-    it('should handle ADD_ANIMATION', () => {
+    it('should handle ADD_FADE_ANIMATION', () => {
         const expectedState = fromJS({
             'splash': {
                 value: 'value',
@@ -31,7 +31,7 @@ describe('Reducer: Fade', () => {
         });
 
         expect(reducer(undefined, {
-            type: ADD_ANIMATION,
+            type: ADD_FADE_ANIMATION,
             payload: {
                 id: 'splash',
                 value: 'value',
@@ -40,7 +40,7 @@ describe('Reducer: Fade', () => {
         })).toEqual(expectedState);
     });
 
-    it('should handle REMOVE_ANIMATION', () => {
+    it('should handle REMOVE_FADE_ANIMATION', () => {
         const initialState = fromJS({
             'splash': {
                 value: 'value',
@@ -58,14 +58,14 @@ describe('Reducer: Fade', () => {
         });
 
         expect(reducer(initialState, {
-            type: REMOVE_ANIMATION,
+            type: REMOVE_FADE_ANIMATION,
             payload: {
                 id: 'splash'
             }
         })).toEqual(expectedState);
     });
 
-    it('should handle CHANGE_ANIMATION', () => {
+    it('should handle CHANGE_FADE_ANIMATION', () => {
         const initialState = fromJS({
             'splash': {
                 value: 'value',
@@ -83,7 +83,7 @@ describe('Reducer: Fade', () => {
         });
 
         expect(reducer(initialState, {
-            type: CHANGE_ANIMATION,
+            type: CHANGE_FADE_ANIMATION,
             payload: {
                 id: 'splash',
                 type: 'new type'
@@ -91,7 +91,7 @@ describe('Reducer: Fade', () => {
         })).toEqual(expectedState);
     });
 
-    it('should handle COMPLETE_ANIMATION', () => {
+    it('should handle COMPLETE_FADE_ANIMATION', () => {
         const initialState = fromJS({
             'splash': {
                 value: 'value',
@@ -109,7 +109,7 @@ describe('Reducer: Fade', () => {
         });
 
         expect(reducer(initialState, {
-            type: COMPLETE_ANIMATION,
+            type: COMPLETE_FADE_ANIMATION,
             payload: {
                 id: 'splash'
             }

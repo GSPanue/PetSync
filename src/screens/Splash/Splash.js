@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {changeAnimation} from '../../actions';
+import {changeFadeAnimation} from '../../actions';
 import {allowNullPropType} from '../../helpers';
 
 import styles from './styles';
@@ -11,13 +11,13 @@ import Logo from '../../components/Logo';
 
 export class Splash extends React.Component {
     static propTypes = {
-        animationType: allowNullPropType(PropTypes.string),
-        animationComplete: PropTypes.bool,
-        changeAnimation: PropTypes.func
+        fadeType: allowNullPropType(PropTypes.string),
+        fadeComplete: PropTypes.bool,
+        changeFadeAnimation: PropTypes.func
     };
 
     componentDidMount() {
-        const {changeAnimation} = this.props;
+        const {changeFadeAnimation} = this.props;
 
         /**
          * ToDo: Fade out component and change screen after checking if the user is logged in.
@@ -25,8 +25,8 @@ export class Splash extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const {animationType, animationComplete} = nextProps;
-        const shouldChangeScreen = (animationType === 'out' && animationComplete);
+        const {fadeType, fadeComplete} = nextProps;
+        const shouldChangeScreen = (fadeType === 'out' && fadeComplete);
 
         if (shouldChangeScreen) {
             const {navigation} = nextProps;
@@ -52,14 +52,14 @@ export class Splash extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        animationType: state.fade.getIn(['splash', 'type']),
-        animationComplete: state.fade.getIn(['splash', 'complete'])
+        fadeType: state.fade.getIn(['splash', 'type']),
+        fadeComplete: state.fade.getIn(['splash', 'complete'])
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeAnimation: (id, type) => dispatch(changeAnimation(id, type))
+        changeFadeAnimation: (id, type) => dispatch(changeFadeAnimation(id, type))
     }
 };
 

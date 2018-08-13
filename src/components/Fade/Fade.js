@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Animated} from 'react-native';
 
-import {addAnimation, removeAnimation, completeAnimation} from '../../actions';
+import {addFadeAnimation, removeFadeAnimation, completeFadeAnimation} from '../../actions';
 import {allowNullPropType} from '../../helpers';
 
 export class Fade extends React.Component {
@@ -11,12 +11,12 @@ export class Fade extends React.Component {
         id: PropTypes.string.isRequired,
         styles: PropTypes.number,
         children: PropTypes.element.isRequired,
-        animationValue: allowNullPropType(PropTypes.object),
-        animationType: allowNullPropType(PropTypes.string),
-        animationComplete: PropTypes.bool,
-        addAnimation: PropTypes.func,
-        removeAnimation: PropTypes.func,
-        completeAnimation: PropTypes.func
+        fadeValue: allowNullPropType(PropTypes.object),
+        fadeType: allowNullPropType(PropTypes.string),
+        fadeComplete: PropTypes.bool,
+        addFadeAnimation: PropTypes.func,
+        removeFadeAnimation: PropTypes.func,
+        completeFadeAnimation: PropTypes.func
     };
 
     static defaultProps = {
@@ -24,48 +24,48 @@ export class Fade extends React.Component {
     };
 
     componentWillMount() {
-        const {id, addAnimation} = this.props;
+        const {id, addFadeAnimation} = this.props;
 
-        addAnimation(id, new Animated.Value(0), 'in');
+        addFadeAnimation(id, new Animated.Value(0), 'in');
     }
 
     componentWillReceiveProps(nextProps) {
-        const {animationValue, animationType, animationComplete} = nextProps;
-        const shouldAnimate = !animationComplete, shouldFadeIn = (animationType === 'in');
+        const {fadeValue, fadeType, fadeComplete} = nextProps;
+        const shouldAnimate = !fadeComplete, shouldFadeIn = (fadeType === 'in');
 
         if (shouldAnimate) {
-            const {id, completeAnimation} = nextProps;
+            const {id, completeFadeAnimation} = nextProps;
 
             // Performs fade in/out animation
-            Animated.timing(animationValue, {
+            Animated.timing(fadeValue, {
                 toValue: (shouldFadeIn) ? 1 : 0,
                 duration: 250,
                 useNativeDriver: true
             }).start(() => {
-                completeAnimation(id);
+                completeFadeAnimation(id);
             });
         }
     }
 
     shouldComponentUpdate(nextProps) {
-        const {animationComplete} = nextProps;
+        const {fadeComplete} = nextProps;
 
         // Updates only when animation is not complete
-        return !animationComplete;
+        return !fadeComplete;
     }
 
 
     componentWillUnmount() {
-        const {id, removeAnimation} = this.props;
+        const {id, removeFadeAnimation} = this.props;
 
-        removeAnimation(id);
+        removeFadeAnimation(id);
     }
 
     render() {
-        const {styles, animationValue, children} = this.props;
+        const {styles, fadeValue, children} = this.props;
 
         return (
-            <Animated.View style={[styles, {opacity: animationValue}]}>
+            <Animated.View style={[styles, {opacity: fadeValue}]}>
                 {children}
             </Animated.View>
         );
@@ -76,17 +76,17 @@ const mapStateToProps = (state, ownProps) => {
     const {id} = ownProps;
 
     return {
-        animationValue: state.fade.getIn([id, 'value']),
-        animationType: state.fade.getIn([id, 'type']),
-        animationComplete: state.fade.getIn([id, 'complete'])
+        fadeValue: state.fade.getIn([id, 'value']),
+        fadeType: state.fade.getIn([id, 'type']),
+        fadeComplete: state.fade.getIn([id, 'complete'])
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addAnimation: (id, value, type) => dispatch(addAnimation(id, value, type)),
-        removeAnimation: (id) => dispatch(removeAnimation(id)),
-        completeAnimation: (id) => dispatch(completeAnimation(id))
+        addFadeAnimation: (id, value, type) => dispatch(addFadeAnimation(id, value, type)),
+        removeFadeAnimation: (id) => dispatch(removeFadeAnimation(id)),
+        completeFadeAnimation: (id) => dispatch(completeFadeAnimation(id))
     }
 };
 
