@@ -24,17 +24,21 @@ export class Splash extends React.Component {
          */
     }
 
-    componentDidUpdate() {
-        const {animationType, animationComplete} = this.props;
+    componentWillReceiveProps(nextProps) {
+        const {animationType, animationComplete} = nextProps;
         const shouldChangeScreen = (animationType === 'out' && animationComplete);
 
         if (shouldChangeScreen) {
-            const {navigation} = this.props;
+            const {navigation} = nextProps;
 
             /**
              * ToDo: Navigate to appropriate screen, e.g. navigation.navigate('SignIn');
              */
         }
+    }
+
+    shouldComponentUpdate() {
+        return false;
     }
 
     render() {

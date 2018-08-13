@@ -29,12 +29,12 @@ export class Fade extends React.Component {
         addAnimation(id, new Animated.Value(0), 'in');
     }
 
-    componentDidUpdate() {
-        const {animationValue, animationType, animationComplete} = this.props;
+    componentWillReceiveProps(nextProps) {
+        const {animationValue, animationType, animationComplete} = nextProps;
         const shouldAnimate = !animationComplete, shouldFadeIn = (animationType === 'in');
 
         if (shouldAnimate) {
-            const {id, completeAnimation} = this.props;
+            const {id, completeAnimation} = nextProps;
 
             // Performs fade in/out animation
             Animated.timing(animationValue, {
@@ -46,6 +46,14 @@ export class Fade extends React.Component {
             });
         }
     }
+
+    shouldComponentUpdate(nextProps) {
+        const {animationComplete} = nextProps;
+
+        // Updates only when animation is not complete
+        return !animationComplete;
+    }
+
 
     componentWillUnmount() {
         const {id, removeAnimation} = this.props;
