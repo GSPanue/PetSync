@@ -31,7 +31,7 @@ export class Fade extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         const {fadeValue, fadeType, fadeComplete} = nextProps;
-        const shouldAnimate = !fadeComplete, shouldFadeIn = (fadeType === 'in');
+        const shouldAnimate = (fadeValue !== null && !fadeComplete), shouldFadeIn = (fadeType === 'in');
 
         if (shouldAnimate) {
             const {id, completeFadeAnimation} = nextProps;
@@ -48,10 +48,10 @@ export class Fade extends React.Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        const {fadeComplete} = nextProps;
+        const {fadeValue, fadeComplete} = nextProps;
 
         // Updates only when fade animation is not complete
-        return !fadeComplete;
+        return (fadeValue !== null && !fadeComplete);
     }
 
 
