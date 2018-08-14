@@ -50,7 +50,7 @@ export class Fade extends React.Component {
     shouldComponentUpdate(nextProps) {
         const {fadeValue, fadeComplete} = nextProps;
 
-        // Updates only when fade animation is not complete
+        // Updates when an animation has been added and isn't complete
         return (fadeValue !== null && !fadeComplete);
     }
 
