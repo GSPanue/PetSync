@@ -1,7 +1,7 @@
 import React from 'react';
+import {Animated} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Animated} from 'react-native';
 
 import {addFadeAnimation, removeFadeAnimation, completeFadeAnimation} from '../../actions';
 import {allowNullPropType} from '../../helpers';
