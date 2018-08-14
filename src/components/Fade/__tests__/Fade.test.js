@@ -7,7 +7,7 @@ import {Fade} from '../Fade';
 describe('Component: Fade', () => {
     const minProps = {
         id: 'id',
-        styles: null,
+        style: null,
         enableTransform: false,
         children: <Text>Child</Text>,
         fadeValue: null,
@@ -36,12 +36,12 @@ describe('Component: Fade', () => {
         expect(wrapper.find('Text')).toHaveLength(1);
     });
 
-    it('should have props for id, styles, enableTransform, children, fadeValue, fadeType, and fadeComplete', () => {
+    it('should have props for id, style, enableTransform, children, fadeValue, fadeType, and fadeComplete', () => {
         const wrapper = shallow(<Fade {...minProps}/>);
         const instance = wrapper.instance();
 
         expect(instance.props.id).toBeDefined();
-        expect(instance.props.styles).toBeDefined();
+        expect(instance.props.style).toBeDefined();
         expect(instance.props.enableTransform).toBeDefined();
         expect(instance.props.children).toBeDefined();
         expect(instance.props.fadeValue).toBeDefined();

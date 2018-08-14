@@ -9,7 +9,7 @@ import {allowNullPropType} from '../../helpers';
 export class Fade extends React.Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
-        styles: PropTypes.number,
+        style: PropTypes.number,
         enableTransform: PropTypes.bool,
         children: PropTypes.element.isRequired,
         fadeValue: allowNullPropType(PropTypes.object),
@@ -21,7 +21,7 @@ export class Fade extends React.Component {
     };
 
     static defaultProps = {
-        styles: null,
+        style: null,
         enableTransform: false
     };
 
@@ -83,11 +83,11 @@ export class Fade extends React.Component {
     }
 
     render() {
-        const {styles, fadeValue, children} = this.props;
+        const {style, fadeValue, children} = this.props;
         const transform = this.createTransformProperty();
 
         return (
-            <Animated.View style={[styles, transform, {opacity: fadeValue}]}>
+            <Animated.View style={[style, transform, {opacity: fadeValue}]}>
                 {children}
             </Animated.View>
         );
