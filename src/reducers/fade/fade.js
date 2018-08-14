@@ -12,6 +12,11 @@ const initialState = fromJS({
         value: null,
         type: null,
         complete: false
+    },
+    'signIn': {
+        value: null,
+        type: null,
+        complete: false
     }
 });
 

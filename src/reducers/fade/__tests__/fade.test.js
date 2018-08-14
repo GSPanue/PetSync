@@ -15,6 +15,11 @@ describe('Reducer: Fade', () => {
                 value: null,
                 type: null,
                 complete: false
+            },
+            'signIn': {
+                value: null,
+                type: null,
+                complete: false
             }
         });
 
@@ -26,6 +31,11 @@ describe('Reducer: Fade', () => {
             'splash': {
                 value: 'value',
                 type: 'type',
+                complete: false
+            },
+            'signIn': {
+                value: null,
+                type: null,
                 complete: false
             }
         });
@@ -46,11 +56,21 @@ describe('Reducer: Fade', () => {
                 value: 'value',
                 type: 'type',
                 complete: true
+            },
+            'signIn': {
+                value: null,
+                type: null,
+                complete: false
             }
         });
 
         const expectedState = fromJS({
             'splash': {
+                value: null,
+                type: null,
+                complete: false
+            },
+            'signIn': {
                 value: null,
                 type: null,
                 complete: false
@@ -71,6 +91,11 @@ describe('Reducer: Fade', () => {
                 value: 'value',
                 type: 'type',
                 complete: true
+            },
+            'signIn': {
+                value: null,
+                type: null,
+                complete: false
             }
         });
 
@@ -78,6 +103,11 @@ describe('Reducer: Fade', () => {
             'splash': {
                 value: 'value',
                 type: 'new type',
+                complete: false
+            },
+            'signIn': {
+                value: null,
+                type: null,
                 complete: false
             }
         });
@@ -97,6 +127,11 @@ describe('Reducer: Fade', () => {
                 value: 'value',
                 type: 'type',
                 complete: false
+            },
+            'signIn': {
+                value: null,
+                type: null,
+                complete: false
             }
         });
 
@@ -105,6 +140,11 @@ describe('Reducer: Fade', () => {
                 value: 'value',
                 type: 'type',
                 complete: true
+            },
+            'signIn': {
+                value: null,
+                type: null,
+                complete: false
             }
         });
 
