@@ -8,6 +8,7 @@ describe('Component: Fade', () => {
     const minProps = {
         id: 'id',
         styles: null,
+        enableTransform: false,
         children: <Text>Child</Text>,
         fadeValue: null,
         fadeType: null,
@@ -35,12 +36,13 @@ describe('Component: Fade', () => {
         expect(wrapper.find('Text')).toHaveLength(1);
     });
 
-    it('should have props for id, styles, children, fadeValue, fadeType, and fadeComplete', () => {
+    it('should have props for id, styles, enableTransform, children, fadeValue, fadeType, and fadeComplete', () => {
         const wrapper = shallow(<Fade {...minProps}/>);
         const instance = wrapper.instance();
 
         expect(instance.props.id).toBeDefined();
         expect(instance.props.styles).toBeDefined();
+        expect(instance.props.enableTransform).toBeDefined();
         expect(instance.props.children).toBeDefined();
         expect(instance.props.fadeValue).toBeDefined();
         expect(instance.props.fadeType).toBeDefined();
@@ -64,6 +66,27 @@ describe('Component: Fade', () => {
             const wrapper = shallow(<Fade {...minProps} addFadeAnimation={addFadeAnimation}/>);
 
             expect(addFadeAnimation).toHaveBeenCalledTimes(1);
+        });
+    });
+
+    describe('Method: createTransformProperty', () => {
+        it('should be called on render', () => {
+            const spy = spyOn(Fade.prototype, 'createTransformProperty');
+            expect(spy).toHaveBeenCalledTimes(0);
+
+            const wrapper = shallow(<Fade {...minProps}/>);
+
+            expect(spy).toHaveBeenCalledTimes(1);
+
+            wrapper.update();
+
+            expect(spy).toHaveBeenCalledTimes(1);
+        });
+
+        it('should return an empty array when enableTransform is false', () => {
+            const wrapper = shallow(<Fade {...minProps}/>);
+
+            expect(wrapper.instance().createTransformProperty()).toEqual([]);
         });
     });
 });
