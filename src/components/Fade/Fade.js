@@ -10,6 +10,7 @@ export class Fade extends React.Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
         styles: PropTypes.number,
+        enableTransform: PropTypes.bool,
         children: PropTypes.element.isRequired,
         fadeValue: allowNullPropType(PropTypes.object),
         fadeType: allowNullPropType(PropTypes.string),
@@ -20,7 +21,8 @@ export class Fade extends React.Component {
     };
 
     static defaultProps = {
-        styles: null
+        styles: null,
+        enableTransform: false
     };
 
     componentWillMount() {
@@ -50,10 +52,8 @@ export class Fade extends React.Component {
     shouldComponentUpdate(nextProps) {
         const {fadeValue, fadeComplete} = nextProps;
 
-        // Updates when an animation has been added and isn't complete
         return (fadeValue !== null && !fadeComplete);
     }
-
 
     componentWillUnmount() {
         const {id, removeFadeAnimation} = this.props;
@@ -61,11 +61,33 @@ export class Fade extends React.Component {
         removeFadeAnimation(id);
     }
 
+    createTransformProperty() {
+        const {enableTransform, fadeValue} = this.props;
+        const shouldCreateTransformProperty = (enableTransform && fadeValue !== null);
+
+        if (shouldCreateTransformProperty) {
+            const transform = {};
+
+            transform.transform = [{
+                // Modifies the scale of the child component
+                scale: fadeValue.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0.80, 1]
+                })
+            }];
+
+            return transform;
+        }
+
+        return [];
+    }
+
     render() {
         const {styles, fadeValue, children} = this.props;
+        const transform = this.createTransformProperty();
 
         return (
-            <Animated.View style={[styles, {opacity: fadeValue}]}>
+            <Animated.View style={[styles, transform, {opacity: fadeValue}]}>
                 {children}
             </Animated.View>
         );
