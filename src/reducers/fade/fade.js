@@ -8,12 +8,12 @@ import {
 const {fromJS} = require('immutable');
 
 const initialState = fromJS({
-    'splash': {
+    splash: {
         value: null,
         type: null,
         complete: false
     },
-    'signIn': {
+    signIn: {
         value: null,
         type: null,
         complete: false
