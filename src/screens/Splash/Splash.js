@@ -43,7 +43,7 @@ export class Splash extends React.Component {
 
     render() {
         return (
-            <Fade id='splash' styles={styles.container} enableTransform={true}>
+            <Fade id='splash' style={styles.container} enableTransform={true}>
                 <Logo height='125' width='125'/>
             </Fade>
         );
