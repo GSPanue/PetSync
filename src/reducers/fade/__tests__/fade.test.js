@@ -11,12 +11,12 @@ const {fromJS} = require('immutable');
 describe('Reducer: Fade', () => {
     it('should return the initial state', () => {
         const expectedState = fromJS({
-            'splash': {
+            splash: {
                 value: null,
                 type: null,
                 complete: false
             },
-            'signIn': {
+            signIn: {
                 value: null,
                 type: null,
                 complete: false
@@ -28,12 +28,12 @@ describe('Reducer: Fade', () => {
 
     it('should handle ADD_FADE_ANIMATION', () => {
         const expectedState = fromJS({
-            'splash': {
+            splash: {
                 value: 'value',
                 type: 'type',
                 complete: false
             },
-            'signIn': {
+            signIn: {
                 value: null,
                 type: null,
                 complete: false
@@ -52,12 +52,12 @@ describe('Reducer: Fade', () => {
 
     it('should handle REMOVE_FADE_ANIMATION', () => {
         const initialState = fromJS({
-            'splash': {
+            splash: {
                 value: 'value',
                 type: 'type',
                 complete: true
             },
-            'signIn': {
+            signIn: {
                 value: null,
                 type: null,
                 complete: false
@@ -65,12 +65,12 @@ describe('Reducer: Fade', () => {
         });
 
         const expectedState = fromJS({
-            'splash': {
+            splash: {
                 value: null,
                 type: null,
                 complete: false
             },
-            'signIn': {
+            signIn: {
                 value: null,
                 type: null,
                 complete: false
@@ -87,12 +87,12 @@ describe('Reducer: Fade', () => {
 
     it('should handle CHANGE_FADE_ANIMATION', () => {
         const initialState = fromJS({
-            'splash': {
+            splash: {
                 value: 'value',
                 type: 'type',
                 complete: true
             },
-            'signIn': {
+            signIn: {
                 value: null,
                 type: null,
                 complete: false
@@ -100,12 +100,12 @@ describe('Reducer: Fade', () => {
         });
 
         const expectedState = fromJS({
-            'splash': {
+            splash: {
                 value: 'value',
                 type: 'new type',
                 complete: false
             },
-            'signIn': {
+            signIn: {
                 value: null,
                 type: null,
                 complete: false
@@ -123,12 +123,12 @@ describe('Reducer: Fade', () => {
 
     it('should handle COMPLETE_FADE_ANIMATION', () => {
         const initialState = fromJS({
-            'splash': {
+            splash: {
                 value: 'value',
                 type: 'type',
                 complete: false
             },
-            'signIn': {
+            signIn: {
                 value: null,
                 type: null,
                 complete: false
@@ -136,12 +136,12 @@ describe('Reducer: Fade', () => {
         });
 
         const expectedState = fromJS({
-            'splash': {
+            splash: {
                 value: 'value',
                 type: 'type',
                 complete: true
             },
-            'signIn': {
+            signIn: {
                 value: null,
                 type: null,
                 complete: false
