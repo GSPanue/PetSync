@@ -168,7 +168,7 @@ export default {
   },
 
   // Icon
-  iconFamily: "Ionicons",
+  iconFamily: "Feather",
   iconFontSize: platform === "ios" ? 30 : 28,
   iconHeaderSize: platform === "ios" ? 33 : 24,
 
