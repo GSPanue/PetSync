@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
 
 import fade from './fade';
-import textField from './textField';
+import form from './form';
 
 export default combineReducers({
     fade,
-    textField
+    form
 });
