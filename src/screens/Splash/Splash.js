@@ -6,7 +6,7 @@ import {changeFadeAnimation} from '../../actions';
 import {allowNullPropType} from '../../helpers';
 
 import styles from './styles';
-import Fade from '../../components/Fade';
+import withFade from '../../components/withFade';
 import Logo from '../../components/Logo';
 
 export class Splash extends React.Component {
@@ -43,9 +43,7 @@ export class Splash extends React.Component {
 
     render() {
         return (
-            <Fade id='splash' style={styles.container} enableTransform={true}>
-                <Logo height='125' width='125'/>
-            </Fade>
+            <Logo height='125' width='125'/>
         );
     }
 }
@@ -63,4 +61,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Splash);
+const withFadeProps = {
+    id: 'splash',
+    style: styles.container,
+    enableTransform: true
+};
+
+export default withFade({...withFadeProps})(connect(mapStateToProps, mapDispatchToProps)(Splash));
