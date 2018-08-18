@@ -16,12 +16,6 @@ describe('Component: Splash', () => {
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should contain a Fade component', () => {
-        const wrapper = shallow(<Splash {...minProps}/>);
-
-        expect(wrapper.find('Connect(Fade)')).toHaveLength(1);
-    });
-
     it('should contain a Logo component', () => {
         const wrapper = shallow(<Splash {...minProps}/>);
 
