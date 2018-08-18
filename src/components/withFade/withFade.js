@@ -6,12 +6,15 @@ import {connect} from 'react-redux';
 import {addFadeAnimation, removeFadeAnimation, completeFadeAnimation} from '../../actions';
 import {allowNullPropType} from '../../helpers';
 
+/**
+ * A higher order component for fade transitions
+ */
 export class Fade extends React.Component {
     static propTypes = {
+        wrappedComponent: PropTypes.func.isRequired,
         id: PropTypes.string.isRequired,
         style: PropTypes.number,
         enableTransform: PropTypes.bool,
-        children: PropTypes.element.isRequired,
         fadeValue: allowNullPropType(PropTypes.object),
         fadeType: allowNullPropType(PropTypes.string),
         fadeComplete: PropTypes.bool,
@@ -83,33 +86,41 @@ export class Fade extends React.Component {
     }
 
     render() {
-        const {style, fadeValue, children} = this.props;
+        const {wrappedComponent, style, fadeValue} = this.props;
         const transform = this.createTransformProperty();
+
+        const WrappedComponent = wrappedComponent;
 
         return (
             <Animated.View style={[style, transform, {opacity: fadeValue}]}>
-                {children}
+                <WrappedComponent/>
             </Animated.View>
         );
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    const {id} = ownProps;
+const withFade = (props) => (WrappedComponent) => {
+    const mapStateToProps = (state) => {
+        const {id} = props;
 
-    return {
-        fadeValue: state.fade.getIn([id, 'value']),
-        fadeType: state.fade.getIn([id, 'type']),
-        fadeComplete: state.fade.getIn([id, 'complete'])
-    }
+        return {
+            wrappedComponent: WrappedComponent,
+            fadeValue: state.fade.getIn([id, 'value']),
+            fadeType: state.fade.getIn([id, 'type']),
+            fadeComplete: state.fade.getIn([id, 'complete']),
+            ...props
+        }
+    };
+
+    const mapDispatchToProps = (dispatch) => {
+        return {
+            addFadeAnimation: (id, value, type) => dispatch(addFadeAnimation(id, value, type)),
+            removeFadeAnimation: (id) => dispatch(removeFadeAnimation(id)),
+            completeFadeAnimation: (id) => dispatch(completeFadeAnimation(id))
+        }
+    };
+
+    return connect(mapStateToProps, mapDispatchToProps)(Fade);
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addFadeAnimation: (id, value, type) => dispatch(addFadeAnimation(id, value, type)),
-        removeFadeAnimation: (id) => dispatch(removeFadeAnimation(id)),
-        completeFadeAnimation: (id) => dispatch(completeFadeAnimation(id))
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Fade);
+export default withFade;
