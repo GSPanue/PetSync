@@ -5,9 +5,9 @@ import {Splash} from '../Splash';
 
 describe('Component: Splash', () => {
     const minProps = {
-        fadeType: null,
-        fadeComplete: false,
-        changeFadeAnimation: () => {}
+        currentScreen: 'Splash',
+        changeScreen: () => {},
+        changeScreenComplete: () => {}
     };
 
     it('should render a single Splash component', () => {
@@ -26,8 +26,8 @@ describe('Component: Splash', () => {
         const wrapper = shallow(<Splash {...minProps}/>);
         const instance = wrapper.instance();
 
-        expect(instance.props.fadeType);
-        expect(instance.props.fadeComplete);
-        expect(instance.props.changeFadeAnimation);
+        expect(instance.props.currentScreen);
+        expect(instance.props.changeScreen);
+        expect(instance.props.changeScreenComplete);
     });
 });
