@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
 
-import fade from './fade';
+import screen from './screen';
 import form from './form';
 
 export default combineReducers({
-    fade,
+    screen,
     form
 });
