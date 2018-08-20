@@ -11,7 +11,7 @@ Animatable.initializeRegistryWithDefinitions({
 });
 
 /**
- * A higher order component for zoom transitions
+ * A higher order component for screen zoom animations
  */
 export class Zoom extends React.Component {
     static propTypes = {
@@ -32,7 +32,6 @@ export class Zoom extends React.Component {
         this.changeScreen = this.changeScreen.bind(this);
         this.zoomOutScreen = this.zoomOutScreen.bind(this);
     }
-
 
     componentWillReceiveProps({currentScreen, nextScreen}) {
         if (isString(nextScreen)) {
@@ -81,7 +80,7 @@ export class Zoom extends React.Component {
             >
                 <WrappedComponent/>
             </Animatable.View>
-        )
+        );
     }
 }
 
