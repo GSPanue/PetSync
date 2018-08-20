@@ -30,15 +30,16 @@ export class Zoom extends React.Component {
 
         this.view = React.createRef();
         this.changeScreen = this.changeScreen.bind(this);
-        this.zoomOut = this.zoomOut.bind(this);
+        this.zoomOutScreen = this.zoomOutScreen.bind(this);
     }
 
 
     componentWillReceiveProps({currentScreen, nextScreen}) {
         if (isString(nextScreen)) {
+            const {changeScreen} = this;
             const shouldChangeScreen = (currentScreen !== nextScreen);
 
-            (shouldChangeScreen) && this.changeScreen(nextScreen);
+            (shouldChangeScreen) && changeScreen(nextScreen);
         }
     }
 
@@ -47,14 +48,16 @@ export class Zoom extends React.Component {
     }
 
     changeScreen(nextScreen) {
-        this.zoomOut(() => {
+        const {zoomOutScreen} = this;
+
+        zoomOutScreen(() => {
             const {navigation} = this.props;
 
             navigation.navigate(nextScreen);
         });
     }
 
-    zoomOut(callback) {
+    zoomOutScreen(callback) {
         const {zoomOut} = this.view.current;
 
         // Zooms out the current screen
