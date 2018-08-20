@@ -55,8 +55,10 @@ export class Zoom extends React.Component {
     }
 
     zoomOut(callback) {
+        const {zoomOut} = this.view.current;
+
         // Zooms out the current screen
-        this.view.current.zoomOut(300).done(() => {
+        zoomOut(300).done(() => {
             (hasCallback(callback)) && callback();
         });
     }
