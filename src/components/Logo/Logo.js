@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import Svg from 'react-native-svg';
 import uuid from 'react-native-uuid';
 
-import Gradient from './components/Gradient';
 import Overlay from './components/Overlay';
 import Underlay from './components/Underlay';
 
 const Logo = ({id, height, width, active, disableTransparency}) => (
     <Svg x='0px' y='0px' height={height} width={width} viewBox='0 0 1000 1000'>
-        {(active) && <Gradient id={id}/>}
         {(disableTransparency) && <Underlay/>}
         <Overlay id={id} active={active}/>
     </Svg>
