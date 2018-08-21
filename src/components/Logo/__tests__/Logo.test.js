@@ -15,55 +15,35 @@ describe('Component: Logo', () => {
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should contain a Svg component', () => {
+    it('should contain a Overlay component', () => {
         const wrapper = shallow(<Logo {...minProps}/>);
 
-        expect(wrapper.find('Svg')).toHaveLength(1);
+        expect(wrapper.find('Overlay')).toHaveLength(1);
     });
 
-    it('should contain a Defs component', () => {
-        const wrapper = shallow(<Logo {...minProps}/>);
-
-        expect(wrapper.find('Defs')).toHaveLength(1);
-    });
-
-    it('should contain a LinearGradient component', () => {
-        const wrapper = shallow(<Logo {...minProps}/>);
-
-        expect(wrapper.find('LinearGradient')).toHaveLength(1);
-    });
-
-    it('should contain a G component when disableTransparency prop is true', () => {
+    it('should contain a Underlay component when disableTransparency is true', () => {
         const wrapper = shallow(<Logo {...minProps} disableTransparency={true}/>);
 
-        expect(wrapper.find('G')).toHaveLength(1);
+        expect(wrapper.find('Underlay')).toHaveLength(1);
     });
 
-    it('should not contain a G component when disableTransparency prop is false', () => {
+    it('should not contain a Underlay component when disableTransparency is false', () => {
+        const wrapper = shallow(<Logo {...minProps} disableTransparency={false}/>);
+
+        expect(wrapper.find('Underlay')).toHaveLength(0);
+    });
+
+    it('should pass height and width as props to the Svg component', () => {
         const wrapper = shallow(<Logo {...minProps}/>);
 
-        expect(wrapper.find('G')).toHaveLength(0);
+        expect(wrapper.find('Svg').props().height).toBeDefined();
+        expect(wrapper.find('Svg').props().width).toBeDefined();
     });
 
-    it('should be a gradient colour when inactive is false', () => {
+    it('should pass id and active as props to the Overlay component', () => {
         const wrapper = shallow(<Logo {...minProps}/>);
 
-        expect(wrapper.find('Path').props().fill).toEqual('url(#logoGradient)');
-    });
-
-    it('should be a light grey colour when inactive is true', () => {
-        const wrapper = shallow(<Logo {...minProps} inactive={true}/>);
-
-        expect(wrapper.find('Path').props().fill).toEqual('#CCCCCC');
-    });
-
-    it('should have props for height, width, inactive, and disableTransparency', () => {
-        const wrapper = shallow(<Logo {...minProps}/>);
-        const instance = wrapper.instance();
-
-        expect(instance.props.height).toBeDefined();
-        expect(instance.props.width).toBeDefined();
-        expect(instance.props.inactive).toBeDefined();
-        expect(instance.props.disableTransparency).toBeDefined();
+        expect(wrapper.find('Overlay').props().id).toBeDefined();
+        expect(wrapper.find('Overlay').props().active).toBeDefined();
     });
 });
