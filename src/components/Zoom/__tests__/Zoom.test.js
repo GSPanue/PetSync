@@ -2,7 +2,7 @@ import React from 'react';
 import {Text} from 'react-native';
 import {shallow} from 'enzyme';
 
-import {Zoom} from '../withZoom';
+import Zoom from '../Zoom';
 
 const WrappedComponent = () => {
     return (
@@ -18,13 +18,13 @@ describe('Component: withZoom', () => {
         style: 1
     };
 
-    it('should render a single Zoom component', () => {
+    it('should render without crashing', () => {
         const wrapper = shallow(<Zoom {...minProps}/>);
 
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should contain a WrappedComponent component', () => {
+    it('should render a WrappedComponent component', () => {
         const wrapper = shallow(<Zoom {...minProps}/>);
 
         expect(wrapper.find('WrappedComponent')).toHaveLength(1);
