@@ -10,13 +10,13 @@ describe('Component: Splash', () => {
         changeScreenComplete: () => {}
     };
 
-    it('should render a single Splash component', () => {
+    it('should render without crashing', () => {
         const wrapper = shallow(<Splash {...minProps}/>);
 
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should contain a Logo component', () => {
+    it('should render a Logo component', () => {
         const wrapper = shallow(<Splash {...minProps}/>);
 
         expect(wrapper.find('Logo')).toHaveLength(1);

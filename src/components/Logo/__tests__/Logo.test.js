@@ -9,25 +9,25 @@ describe('Component: Logo', () => {
         width: '125'
     };
 
-    it('should render a single Logo component', () => {
+    it('should render without crashing', () => {
         const wrapper = shallow(<Logo {...minProps}/>);
 
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should contain a Overlay component', () => {
+    it('should render a Overlay component', () => {
         const wrapper = shallow(<Logo {...minProps}/>);
 
         expect(wrapper.find('Overlay')).toHaveLength(1);
     });
 
-    it('should contain a Underlay component when disableTransparency is true', () => {
+    it('should render a Underlay component when disableTransparency is true', () => {
         const wrapper = shallow(<Logo {...minProps} disableTransparency={true}/>);
 
         expect(wrapper.find('Underlay')).toHaveLength(1);
     });
 
-    it('should not contain a Underlay component when disableTransparency is false', () => {
+    it('should not render a Underlay component when disableTransparency is false', () => {
         const wrapper = shallow(<Logo {...minProps} disableTransparency={false}/>);
 
         expect(wrapper.find('Underlay')).toHaveLength(0);

@@ -6,19 +6,19 @@ import {App} from '..';
 describe('Component: App', () => {
     const wrapper = shallow(<App/>);
 
-    it('should render a single App component', () => {
+    it('should render without crashing', () => {
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should contain a Provider component', () => {
+    it('should render a Provider component', () => {
         expect(wrapper.find('Provider')).toHaveLength(1);
     });
 
-    it('should contain a StyleProvider component', () => {
+    it('should render a StyleProvider component', () => {
         expect(wrapper.find('StyleProvider')).toHaveLength(1);
     });
 
-    it('should contain a NavigationContainer component', () => {
+    it('should render a NavigationContainer component', () => {
         expect(wrapper.find('NavigationContainer')).toHaveLength(1);
     });
 });
