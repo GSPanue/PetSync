@@ -1,26 +1,36 @@
 import React from 'react';
-import {InteractionManager} from 'react-native';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-
-import {changeScreen, changeScreenComplete} from '../../actions';
+import {InteractionManager, BackHandler} from 'react-native';
 
 import styles from './styles';
 import withZoom from '../../components/withZoom';
 import Logo from '../../components/Logo';
 
 export class Splash extends React.Component {
-    static propTypes = {
-        currentScreen: PropTypes.string,
-        changeScreen: PropTypes.func,
-        changeScreenComplete: PropTypes.func
-    };
+    constructor() {
+        super();
+
+        this.handleBackButtonPress = this.handleBackButtonPress.bind(this);
+    }
+
+    componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonPress);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonPress);
+    }
+
+    handleBackButtonPress() {
+        const {navigation} = this.props;
+
+        // Prevents back button from minimising application
+        navigation.goBack(null);
+        return true;
+    }
 
     componentDidMount() {
-        const {currentScreen, changeScreen, changeScreenComplete} = this.props;
-
         InteractionManager.runAfterInteractions(() => {
-            (currentScreen !== 'Splash') && changeScreenComplete();
+            const {navigation} = this.props;
 
             /**
              * ToDo: Change screen after checking if the user is logged in.
@@ -39,21 +49,8 @@ export class Splash extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        currentScreen: state.screen.get('currentScreen')
-    }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        changeScreen: (screen) => dispatch(changeScreen(screen)),
-        changeScreenComplete: () => dispatch(changeScreenComplete())
-    }
-};
-
 const zoomProps = {
     style: styles.container
 };
 
-export default withZoom({...zoomProps})(connect(mapStateToProps, mapDispatchToProps)(Splash));
+export default withZoom({...zoomProps})(Splash);
