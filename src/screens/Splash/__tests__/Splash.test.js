@@ -31,6 +31,31 @@ describe('Component: Splash', () => {
         expect(instance.props.zoomOutScreen).toBeDefined();
     });
 
+    describe('Method: shouldComponentUpdate', () => {
+        it('should return false', () => {
+            const wrapper = shallow(<Splash {...minProps}/>);
+            const instance = wrapper.instance();
+
+            expect(instance.shouldComponentUpdate()).toEqual(false);
+        });
+    });
+
+    describe('Method: componentWillUnmount', () => {
+        it('should remove the back press listener', () => {
+            const wrapper = shallow(<Splash {...minProps}/>);
+            const instance = wrapper.instance();
+
+            const remove = jest.fn();
+
+            instance.backPressListener = {
+                remove: remove
+            };
+
+            wrapper.unmount();
+            expect(remove).toHaveBeenCalledTimes(1);
+        });
+    });
+
     describe('Method: handleBackPress', () => {
         it('should call goBack', () => {
             const goBack = jest.fn();
