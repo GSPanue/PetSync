@@ -1,11 +1,17 @@
 import React from 'react';
 import {InteractionManager, BackHandler} from 'react-native';
+import PropTypes from 'prop-types';
 
 import styles from './styles';
 import withZoom from '../../components/withZoom';
 import Logo from '../../components/Logo';
 
 export class Splash extends React.Component {
+    static propTypes = {
+        navigation: PropTypes.object.isRequired,
+        zoomOutScreen: PropTypes.object.isRequired
+    };
+
     constructor() {
         super();
 
