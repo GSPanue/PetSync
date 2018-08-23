@@ -5,9 +5,10 @@ import {Splash} from '../Splash';
 
 describe('Component: Splash', () => {
     const minProps = {
-        currentScreen: 'Splash',
-        changeScreen: () => {},
-        changeScreenComplete: () => {}
+        navigation: {
+            navigate: () => {}
+        },
+        zoomOutScreen: () => {}
     };
 
     it('should render without crashing', () => {
@@ -22,12 +23,34 @@ describe('Component: Splash', () => {
         expect(wrapper.find('Logo')).toHaveLength(1);
     });
 
-    it('should have props for fadeType, fadeComplete, and changeFadeAnimation', () => {
+    it('should have props for navigation and zoomOutScreen', () => {
         const wrapper = shallow(<Splash {...minProps}/>);
         const instance = wrapper.instance();
 
-        expect(instance.props.currentScreen);
-        expect(instance.props.changeScreen);
-        expect(instance.props.changeScreenComplete);
+        expect(instance.props.navigation).toBeDefined();
+        expect(instance.props.zoomOutScreen).toBeDefined();
+    });
+
+    describe('Method: handleBackPress', () => {
+        it('should call goBack', () => {
+            const goBack = jest.fn();
+            const navigation = {navigation: {goBack: goBack}};
+
+            const wrapper = shallow(<Splash {...minProps} {...navigation}/>);
+            const instance = wrapper.instance();
+
+            expect(goBack).toHaveBeenCalledTimes(0);
+            instance.handleBackPress();
+            expect(goBack).toHaveBeenCalledTimes(1);
+        });
+
+        it('should return true', () => {
+            const navigation = {navigation: {goBack: jest.fn()}};
+
+            const wrapper = shallow(<Splash {...minProps} {...navigation}/>);
+            const instance = wrapper.instance();
+
+            expect(instance.handleBackPress()).toEqual(true);
+        });
     });
 });

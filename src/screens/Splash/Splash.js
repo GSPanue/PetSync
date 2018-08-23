@@ -9,7 +9,7 @@ import Logo from '../../components/Logo';
 export class Splash extends React.Component {
     static propTypes = {
         navigation: PropTypes.object.isRequired,
-        zoomOutScreen: PropTypes.object.isRequired
+        zoomOutScreen: PropTypes.func.isRequired
     };
 
     constructor() {
