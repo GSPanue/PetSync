@@ -9,28 +9,17 @@ export class Splash extends React.Component {
     constructor() {
         super();
 
-        this.handleBackButtonPress = this.handleBackButtonPress.bind(this);
-    }
-
-    componentWillMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonPress);
-    }
-
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonPress);
-    }
-
-    handleBackButtonPress() {
-        const {navigation} = this.props;
-
-        // Prevents back button from minimising application
-        navigation.goBack(null);
-        return true;
+        this.handleBackPress = this.handleBackPress.bind(this);
+        this.backPressListener = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     }
 
     componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
-            const {navigation} = this.props;
+            const {navigation, zoomOutScreen} = this.props;
+
+            zoomOutScreen(() => {
+                navigation.navigate('SignIn');
+            });
 
             /**
              * ToDo: Change screen after checking if the user is logged in.
@@ -40,6 +29,18 @@ export class Splash extends React.Component {
 
     shouldComponentUpdate() {
         return false;
+    }
+
+    componentWillUnmount() {
+        this.backPressListener.remove();
+    }
+
+    handleBackPress() {
+        const {navigation} = this.props;
+
+        // Prevents the hardware back button from minimising application
+        navigation.goBack(null);
+        return true;
     }
 
     render() {
