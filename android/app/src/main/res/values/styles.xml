@@ -4,5 +4,6 @@
         <item name="android:windowBackground">@color/background</item>
         <item name="android:textColor">@color/textColor</item>
         <item name="colorControlActivated">@color/colorControlActivated</item>
+        <item name="android:textColorHighlight">@color/textColorHighlight</item>
     </style>
 </resources>
