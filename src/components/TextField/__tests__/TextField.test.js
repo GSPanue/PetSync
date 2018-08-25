@@ -17,22 +17,22 @@ describe('Component: TextField', () => {
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should render a TouchableWithoutFeedback component', () => {
+    it('should render a Form component', () => {
         const wrapper = shallow(<TextField {...minProps}/>);
 
-        expect(wrapper.find('TouchableWithoutFeedback')).toHaveLength(1);
+        expect(wrapper.find('Styled(Form)')).toHaveLength(1);
     });
 
-    it('should render a View component', () => {
+    it('should render a Item component', () => {
         const wrapper = shallow(<TextField {...minProps}/>);
 
-        expect(wrapper.find('Component')).toHaveLength(1);
+        expect(wrapper.find('Styled(Item)')).toHaveLength(1);
     });
 
-    it('should render a TextInput component', () => {
+    it('should render a Input component', () => {
         const wrapper = shallow(<TextField {...minProps}/>);
 
-        expect(wrapper.find('TextInput')).toHaveLength(1);
+        expect(wrapper.find('Styled(Input)')).toHaveLength(1);
     });
 
     it('should render a Icon component when icon is not undefined', () => {
@@ -57,14 +57,12 @@ describe('Component: TextField', () => {
         expect(instance.props.setFieldTouched).toBeDefined();
     });
 
-    it('should have props for placeholder, icon, touched, autoCorrect, keyboardType, and secureTextEntry', () => {
+    it('should have props for placeholder, icon, touched, and autoCorrect', () => {
         const props = {
             placeholder: 'placeholder',
             icon: 'icon',
             touched: false,
-            autoCorrect: false,
-            keyboardType: 'email-address',
-            secureTextEntry: false
+            autoCorrect: false
         };
 
         const wrapper = shallow(<TextField {...minProps} {...props}/>);
@@ -74,8 +72,21 @@ describe('Component: TextField', () => {
         expect(instance.props.icon).toBeDefined();
         expect(instance.props.touched).toBeDefined();
         expect(instance.props.autoCorrect).toBeDefined();
+    });
+
+    it('should have props for keyboardType, secureTextEntry, and error', () => {
+        const props = {
+            keyboardType: 'email-address',
+            secureTextEntry: false,
+            error: 'error'
+        };
+
+        const wrapper = shallow(<TextField {...minProps} {...props}/>);
+        const instance = wrapper.instance();
+
         expect(instance.props.keyboardType).toBeDefined();
         expect(instance.props.secureTextEntry).toBeDefined();
+        expect(instance.props.error).toBeDefined();
     });
 
     describe('Method: shouldComponentUpdate', () => {
@@ -111,7 +122,9 @@ describe('Component: TextField', () => {
 
             instance.textField = {
                 current: {
-                    focus: focus
+                    wrappedInstance: {
+                        focus: focus
+                    }
                 }
             };
 
@@ -163,9 +176,8 @@ describe('Component: TextField', () => {
             const instance = wrapper.instance();
 
             const expectedResult = {
-                pointerEvents: 'box-none',
                 color: '#5571B6',
-                textColor: '#5571B6'
+                inputColor: '#5571B6'
             };
 
             expect(instance.getExtraStyles()).toEqual(expectedResult);
@@ -176,9 +188,8 @@ describe('Component: TextField', () => {
             const instance = wrapper.instance();
 
             const expectedResult = {
-                pointerEvents: 'box-only',
                 color: '#CCCCCC',
-                textColor: '#CCCCCC'
+                inputColor: '#CCCCCC'
             };
 
             expect(instance.getExtraStyles()).toEqual(expectedResult);
@@ -189,9 +200,20 @@ describe('Component: TextField', () => {
             const instance = wrapper.instance();
 
             const expectedResult = {
-                pointerEvents: 'box-only',
                 color: '#CCCCCC',
-                textColor: '#8E8E8E'
+                inputColor: '#8E8E8E'
+            };
+
+            expect(instance.getExtraStyles()).toEqual(expectedResult);
+        });
+
+        it('should return an object for a text field with an error', () => {
+            const wrapper = shallow(<TextField {...minProps} touched={false} error='error'/>);
+            const instance = wrapper.instance();
+
+            const expectedResult = {
+                color: '#D24C4C',
+                inputColor: '#CCCCCC'
             };
 
             expect(instance.getExtraStyles()).toEqual(expectedResult);
