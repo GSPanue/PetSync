@@ -51,6 +51,7 @@ describe('Component: Splash', () => {
                 remove: remove
             };
 
+            expect(remove).toHaveBeenCalledTimes(0);
             wrapper.unmount();
             expect(remove).toHaveBeenCalledTimes(1);
         });

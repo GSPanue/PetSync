@@ -38,7 +38,9 @@ export class Splash extends React.Component {
     }
 
     componentWillUnmount() {
-        this.backPressListener.remove();
+        const {backPressListener} = this;
+
+        backPressListener.remove();
     }
 
     handleBackPress() {
