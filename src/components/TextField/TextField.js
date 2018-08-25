@@ -1,7 +1,6 @@
 import React from 'react';
-import {TouchableWithoutFeedback, View, TextInput} from 'react-native';
 import PropTypes from 'prop-types';
-import {Icon} from 'native-base';
+import {Form, Item, Input, Icon} from 'native-base';
 
 import styles from './styles';
 
@@ -15,6 +14,7 @@ class TextField extends React.Component {
         autoCorrect: PropTypes.bool,
         keyboardType: PropTypes.string,
         secureTextEntry: PropTypes.bool,
+        error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
         setFieldValue: PropTypes.func.isRequired,
         setFieldTouched: PropTypes.func.isRequired
     };
@@ -38,7 +38,7 @@ class TextField extends React.Component {
     }
 
     handlePress() {
-        const {current: textField} = this.textField;
+        const {wrappedInstance: textField} = this.textField.current;
 
         // Focuses the text field
         textField.focus();
@@ -63,45 +63,40 @@ class TextField extends React.Component {
     };
 
     getExtraStyles() {
-        const {value, touched} = this.props;
+        const {value, touched, error} = this.props;
         const extraStyles = {};
 
         if (touched) {
             Object.assign(extraStyles, {
-                pointerEvents: 'box-none',
                 color: '#5571B6',
-                textColor: '#5571B6'
+                inputColor: '#5571B6'
             });
 
             return extraStyles;
         }
 
         Object.assign(extraStyles, {
-            pointerEvents: 'box-only',
-            color: '#CCCCCC',
-            textColor: (value) ? '#8E8E8E' : '#CCCCCC'
+            color: (error) ? '#D24C4C' : '#CCCCCC',
+            inputColor: (value) ? '#8E8E8E' : '#CCCCCC'
         });
 
         return extraStyles;
     }
 
     render() {
-        const {placeholder, icon, value, autoCorrect, keyboardType, secureTextEntry} = this.props;
-        const extraStyles = this.getExtraStyles();
-        const hasNoIcon = !icon;
+        const {placeholder, icon, value, autoCorrect, keyboardType, secureTextEntry, error} = this.props;
+        const {getExtraStyles} = this;
+
+        const extraStyles = getExtraStyles();
 
         return (
-            <TouchableWithoutFeedback onPress={this.handlePress}>
-                <View
-                    style={[styles.container, {borderColor: extraStyles.color}]}
-                    pointerEvents={extraStyles.pointerEvents}
-                >
+            <Form style={styles.form}>
+                <Item rounded onPress={this.handlePress} style={{borderColor: extraStyles.color}}>
                     {(icon) && <Icon name={icon} style={[styles.icon, {color: extraStyles.color}]}/>}
-                    <TextInput
+                    <Input
                         ref={this.textField}
                         placeholder={placeholder}
                         defaultValue={value}
-                        underlineColorAndroid='transparent'
                         placeholderTextColor='#CCCCCC'
                         autoCapitalize='none'
                         autoCorrect={autoCorrect}
@@ -110,10 +105,11 @@ class TextField extends React.Component {
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
                         onChangeText={this.handleChange}
-                        style={[styles.input, {color: extraStyles.textColor}, (hasNoIcon) && {paddingLeft: 28}]}
+                        style={[styles.input, {color: extraStyles.inputColor}, (icon) && {paddingLeft: 0}]}
                     />
-                </View>
-            </TouchableWithoutFeedback>
+                </Item>
+                {/* <--- Add Error Message Component --> */}
+            </Form>
         );
     }
 }
