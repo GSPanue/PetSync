@@ -4,13 +4,15 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 
 import TextField from '../TextField';
+import SubmitButton from '../SubmitButton';
 
 class SignInForm extends React.Component {
     constructor() {
         super();
 
-        this.handleKeyboardDidHide = this.handleKeyboardDidHide.bind(this);
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.handleKeyboardDidHide);
+        this.handleKeyboardDidHide = this.handleKeyboardDidHide.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     shouldComponentUpdate() {
@@ -27,6 +29,12 @@ class SignInForm extends React.Component {
         Keyboard.dismiss();
     }
 
+    handleSubmit(values) {
+        /**
+         * ToDo: Handle form submission
+         */
+    }
+
     render() {
         return (
             <Formik
@@ -35,7 +43,8 @@ class SignInForm extends React.Component {
                     email: Yup.string().required('You can\'t leave this field empty'),
                     password: Yup.string().required('You can\'t leave this field empty')
                 })}
-                render={({values, touched, setFieldValue, setFieldTouched, errors}) => (
+                onSubmit={this.test}
+                render={({values, touched, setFieldValue, setFieldTouched, errors, handleSubmit}) => (
                     <Fragment>
                         <TextField
                             name='email'
@@ -58,6 +67,10 @@ class SignInForm extends React.Component {
                             secureTextEntry={true}
                             setFieldValue={setFieldValue}
                             setFieldTouched={setFieldTouched}
+                        />
+                        <SubmitButton
+                            title='Sign In'
+                            submit={handleSubmit}
                         />
                     </Fragment>
                 )}

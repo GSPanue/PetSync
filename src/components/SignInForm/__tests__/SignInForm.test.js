@@ -22,6 +22,12 @@ describe('Component: SignInForm', () => {
         expect(wrapper.find('TextField')).toHaveLength(2);
     });
 
+    it('should render a SubmitButton component', () => {
+        const wrapper = shallow(<SignInForm/>).dive();
+
+        expect(wrapper.find('SubmitButton')).toHaveLength(1);
+    });
+
     describe('Method: shouldComponentUpdate', () => {
         it('should return false', () => {
             const wrapper = shallow(<SignInForm/>);
