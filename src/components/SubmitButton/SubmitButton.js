@@ -5,7 +5,7 @@ import {Button} from 'native-base';
 
 import styles from './styles';
 
-class SubmitButton extends React.Component {
+class SubmitButton extends React.PureComponent {
     static propTypes = {
         title: PropTypes.string.isRequired,
         position: PropTypes.string,
