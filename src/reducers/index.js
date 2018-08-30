@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
-import form from './form';
+import keyboard from './keyboard';
 
 export default combineReducers({
-    form
+    keyboard
 });
