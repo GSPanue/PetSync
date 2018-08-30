@@ -177,7 +177,7 @@ export default {
   inputBorderColor: "#CCCCCC",
   inputSuccessBorderColor: "#2b8339",
   inputErrorBorderColor: "#ed2f2f",
-  inputHeightBase: 46,
+  inputHeightBase: 40,
   get inputColor() {
     return this.textColor;
   },
@@ -238,7 +238,7 @@ export default {
   tabFontSize: 15,
 
   // Text
-  textColor: "#000",
+  textColor: "#515151",
   inverseTextColor: "#fff",
   noteFontSize: 14,
   get defaultTextColor() {
