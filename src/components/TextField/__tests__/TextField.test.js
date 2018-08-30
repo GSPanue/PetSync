@@ -6,6 +6,7 @@ import TextField from '../TextField';
 describe('Component: TextField', () => {
     const minProps = {
         name: 'name',
+        label: 'label',
         value: '',
         setFieldValue: () => {},
         setFieldTouched: () => {}
@@ -29,53 +30,33 @@ describe('Component: TextField', () => {
         expect(wrapper.find('Styled(Item)')).toHaveLength(1);
     });
 
+    it('should render a Label component', () => {
+        const wrapper = shallow(<TextField {...minProps}/>);
+
+        expect(wrapper.find('Styled(Label)')).toHaveLength(1);
+    });
+
     it('should render a Input component', () => {
         const wrapper = shallow(<TextField {...minProps}/>);
 
         expect(wrapper.find('Styled(Input)')).toHaveLength(1);
     });
 
-    it('should render a Icon component when icon is not undefined', () => {
-        const wrapper = shallow(<TextField {...minProps} icon='at-sign'/>);
-
-        expect(wrapper.find('Styled(Icon)')).toHaveLength(1);
-    });
-
-    it('should not render a Icon component when icon is undefined', () => {
-        const wrapper = shallow(<TextField {...minProps}/>);
-
-        expect(wrapper.find('Styled(Icon)')).toHaveLength(0);
-    });
-
-    it('should have props for name, value, setFieldValue, and setFieldTouched', () => {
+    it('should have props for name, label, value, setFieldValue, and setFieldTouched', () => {
         const wrapper = shallow(<TextField {...minProps}/>);
         const instance = wrapper.instance();
 
         expect(instance.props.name).toBeDefined();
+        expect(instance.props.label).toBeDefined();
         expect(instance.props.value).toBeDefined();
         expect(instance.props.setFieldValue).toBeDefined();
         expect(instance.props.setFieldTouched).toBeDefined();
     });
 
-    it('should have props for placeholder, icon, touched, and autoCorrect', () => {
+    it('should have props for touched, autoCorrect, keyboardType, secureTextEntry, and error', () => {
         const props = {
-            placeholder: 'placeholder',
-            icon: 'icon',
             touched: false,
-            autoCorrect: false
-        };
-
-        const wrapper = shallow(<TextField {...minProps} {...props}/>);
-        const instance = wrapper.instance();
-
-        expect(instance.props.placeholder).toBeDefined();
-        expect(instance.props.icon).toBeDefined();
-        expect(instance.props.touched).toBeDefined();
-        expect(instance.props.autoCorrect).toBeDefined();
-    });
-
-    it('should have props for keyboardType, secureTextEntry, and error', () => {
-        const props = {
+            autoCorrect: false,
             keyboardType: 'email-address',
             secureTextEntry: false,
             error: 'error'
@@ -84,6 +65,8 @@ describe('Component: TextField', () => {
         const wrapper = shallow(<TextField {...minProps} {...props}/>);
         const instance = wrapper.instance();
 
+        expect(instance.props.touched).toBeDefined();
+        expect(instance.props.autoCorrect).toBeDefined();
         expect(instance.props.keyboardType).toBeDefined();
         expect(instance.props.secureTextEntry).toBeDefined();
         expect(instance.props.error).toBeDefined();
@@ -110,27 +93,6 @@ describe('Component: TextField', () => {
             };
 
             expect(instance.shouldComponentUpdate(nextProps)).toEqual(true);
-        });
-    });
-
-    describe('Method: handlePress', () => {
-        it('should focus the text field', () => {
-            const wrapper = shallow(<TextField {...minProps}/>);
-            const instance = wrapper.instance();
-
-            const focus = jest.fn();
-
-            instance.textField = {
-                current: {
-                    wrappedInstance: {
-                        focus: focus
-                    }
-                }
-            };
-
-            expect(focus).toHaveBeenCalledTimes(0);
-            instance.handlePress();
-            expect(focus).toHaveBeenCalledTimes(1);
         });
     });
 
@@ -176,8 +138,13 @@ describe('Component: TextField', () => {
             const instance = wrapper.instance();
 
             const expectedResult = {
-                color: '#5571B6',
-                inputColor: '#5571B6'
+                item: {
+                    borderColor: '#5571B6'
+                },
+                label: {
+                    color: '#5571B6'
+                },
+                input: {}
             };
 
             expect(instance.getExtraStyles()).toEqual(expectedResult);
@@ -188,8 +155,15 @@ describe('Component: TextField', () => {
             const instance = wrapper.instance();
 
             const expectedResult = {
-                color: '#CCCCCC',
-                inputColor: '#CCCCCC'
+                item: {
+                    borderColor: '#CCCCCC'
+                },
+                label: {
+                    color: '#CCCCCC'
+                },
+                input: {
+                    color: '#CCCCCC'
+                }
             };
 
             expect(instance.getExtraStyles()).toEqual(expectedResult);
@@ -200,20 +174,34 @@ describe('Component: TextField', () => {
             const instance = wrapper.instance();
 
             const expectedResult = {
-                color: '#CCCCCC',
-                inputColor: '#8E8E8E'
+                item: {
+                    borderColor: '#CCCCCC'
+                },
+                label: {
+                    color: '#CCCCCC'
+                },
+                input: {
+                    color: '#8E8E8E'
+                }
             };
 
             expect(instance.getExtraStyles()).toEqual(expectedResult);
         });
 
         it('should return an object for a text field with an error', () => {
-            const wrapper = shallow(<TextField {...minProps} touched={false} error='error'/>);
+            const wrapper = shallow(<TextField {...minProps} error='error'/>);
             const instance = wrapper.instance();
 
             const expectedResult = {
-                color: '#D24C4C',
-                inputColor: '#CCCCCC'
+                item: {
+                    borderColor: '#D24C4C'
+                },
+                label: {
+                    color: '#D24C4C'
+                },
+                input: {
+                    color: '#CCCCCC'
+                }
             };
 
             expect(instance.getExtraStyles()).toEqual(expectedResult);

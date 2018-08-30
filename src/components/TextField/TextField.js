@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Form, Item, Input, Icon} from 'native-base';
+import {Form, Item, Input, Label} from 'native-base';
 
 import styles from './styles';
 
 class TextField extends React.Component {
     static propTypes = {
         name: PropTypes.string.isRequired,
-        placeholder: PropTypes.string,
-        icon: PropTypes.string,
+        label: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
         touched: PropTypes.bool,
         autoCorrect: PropTypes.bool,
@@ -22,8 +21,6 @@ class TextField extends React.Component {
     constructor() {
         super();
 
-        this.textField = React.createRef();
-        this.handlePress = this.handlePress.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
@@ -35,13 +32,6 @@ class TextField extends React.Component {
         const {touched: nextTouched} = nextProps;
 
         return (currentTouched !== nextTouched);
-    }
-
-    handlePress() {
-        const {wrappedInstance: textField} = this.textField.current;
-
-        // Focuses the text field
-        textField.focus();
     }
 
     handleChange(text) {
@@ -68,36 +58,45 @@ class TextField extends React.Component {
 
         if (touched) {
             Object.assign(extraStyles, {
-                color: '#5571B6',
-                inputColor: '#5571B6'
+                item: {
+                    borderColor: '#5571B6'
+                },
+                label: {
+                    color: '#5571B6'
+                },
+                input: {}
             });
 
             return extraStyles;
         }
 
         Object.assign(extraStyles, {
-            color: (error) ? '#D24C4C' : '#CCCCCC',
-            inputColor: (value) ? '#8E8E8E' : '#CCCCCC'
+            item: {
+                borderColor: (error) ? '#D24C4C' : '#CCCCCC'
+            },
+            label: {
+                color: (error) ? '#D24C4C' : '#CCCCCC'
+            },
+            input: {
+                color: (value) ? '#8E8E8E' : '#CCCCCC'
+            }
         });
 
         return extraStyles;
     }
 
     render() {
-        const {placeholder, icon, value, autoCorrect, keyboardType, secureTextEntry, error} = this.props;
+        const {label, value, autoCorrect, keyboardType, secureTextEntry, error} = this.props;
         const {getExtraStyles} = this;
 
         const extraStyles = getExtraStyles();
 
         return (
             <Form style={styles.form}>
-                <Item rounded onPress={this.handlePress} style={{borderColor: extraStyles.color}}>
-                    {(icon) && <Icon name={icon} style={[styles.icon, {color: extraStyles.color}]}/>}
+                <Item floatingLabel style={[styles.item, extraStyles.item]}>
+                    <Label style={[styles.label, extraStyles.label]}>{label}</Label>
                     <Input
-                        ref={this.textField}
-                        placeholder={placeholder}
                         defaultValue={value}
-                        placeholderTextColor='#CCCCCC'
                         autoCapitalize='none'
                         autoCorrect={autoCorrect}
                         keyboardType={keyboardType}
@@ -105,7 +104,7 @@ class TextField extends React.Component {
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
                         onChangeText={this.handleChange}
-                        style={[styles.input, {color: extraStyles.inputColor}, (icon) && {paddingLeft: 0}]}
+                        style={[styles.input, extraStyles.input]}
                     />
                 </Item>
                 {/* <--- Add Error Message Component --> */}
