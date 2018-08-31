@@ -5,8 +5,8 @@ import {Path} from 'react-native-svg';
 import definitions from './definitions';
 import Gradient from './components/Gradient';
 
-const Overlay = ({id, active}) => {
-    const fill = (active) ? `url(#${id})` : '#CCCCCC';
+const Overlay = ({id, fill, active}) => {
+    (fill && !active || !fill) ? fill = ((active) ? `url(#${id})` : '#CCCCCC') : false;
 
     return (
         <Fragment>
@@ -18,6 +18,7 @@ const Overlay = ({id, active}) => {
 
 Overlay.propTypes = {
     id: PropTypes.string.isRequired,
+    fill: PropTypes.string,
     active: PropTypes.bool.isRequired
 };
 

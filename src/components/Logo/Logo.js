@@ -6,10 +6,10 @@ import uuid from 'react-native-uuid';
 import Overlay from './components/Overlay';
 import Underlay from './components/Underlay';
 
-const Logo = ({id, height, width, active, disableTransparency}) => (
+const Logo = ({id, height, width, fill, active, disableTransparency}) => (
     <Svg x='0px' y='0px' height={height} width={width} viewBox='0 0 1000 1000'>
         {(disableTransparency) && <Underlay/>}
-        <Overlay id={id} active={active}/>
+        <Overlay id={id} fill={fill} active={active}/>
     </Svg>
 );
 
@@ -17,6 +17,7 @@ Logo.propTypes = {
     id: PropTypes.string,
     height: PropTypes.string.isRequired,
     width: PropTypes.string.isRequired,
+    fill: PropTypes.string,
     active: PropTypes.bool,
     disableTransparency: PropTypes.bool
 };
