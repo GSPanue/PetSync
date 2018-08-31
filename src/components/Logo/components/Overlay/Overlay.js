@@ -6,7 +6,7 @@ import definitions from './definitions';
 import Gradient from './components/Gradient';
 
 const Overlay = ({id, fill, active}) => {
-    (fill && !active || !fill) ? fill = ((active) ? `url(#${id})` : '#CCCCCC') : false;
+    (!active) ? fill = '#CCCCCC' : ((!fill) ? fill = `url(#${id})` : false);
 
     return (
         <Fragment>
