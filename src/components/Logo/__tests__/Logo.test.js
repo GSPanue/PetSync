@@ -6,7 +6,8 @@ import Logo from '../Logo';
 describe('Component: Logo', () => {
     const minProps = {
         height: '125',
-        width: '125'
+        width: '125',
+        fill: ''
     };
 
     it('should render without crashing', () => {
@@ -40,10 +41,11 @@ describe('Component: Logo', () => {
         expect(wrapper.find('Svg').props().width).toBeDefined();
     });
 
-    it('should pass id and active as props to the Overlay component', () => {
+    it('should pass id, fill, and active as props to the Overlay component', () => {
         const wrapper = shallow(<Logo {...minProps}/>);
 
         expect(wrapper.find('Overlay').props().id).toBeDefined();
+        expect(wrapper.find('Overlay').props().fill).toBeDefined();
         expect(wrapper.find('Overlay').props().active).toBeDefined();
     });
 });
