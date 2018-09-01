@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
 
-import styles from './styles';
+import {Wrapper, FormWrapper, Footer} from './styles';
 import withZoom from '../../components/withZoom';
-import Logo from '../../components/Logo';
+import SignInHeader from '../../components/SignInHeader';
 import SignInForm from '../../components/SignInForm';
 
 export class SignIn extends React.Component {
@@ -13,23 +13,17 @@ export class SignIn extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.logo}>
-                    <Logo height='135' width='135'/>
-                </View>
-                <View style={styles.form}>
+            <Wrapper>
+                <SignInHeader/>
+                <FormWrapper>
                     <SignInForm/>
-                </View>
-                <View style={styles.navigation}>
+                </FormWrapper>
+                <Footer>
                     <Text>Don't have an account? Register</Text>
-                </View>
-            </View>
+                </Footer>
+            </Wrapper>
         );
     }
 }
 
-const zoomProps = {
-    style: styles.container
-};
-
-export default withZoom({...zoomProps})(SignIn);
+export default withZoom(SignIn);

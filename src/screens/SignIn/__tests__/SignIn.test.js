@@ -10,22 +10,22 @@ describe('Component: SignIn', () => {
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should render four View components', () => {
+    it('should render three View components', () => {
         const wrapper = shallow(<SignIn/>);
 
-        expect(wrapper.find('Component')).toHaveLength(4);
+        expect(wrapper.find('Styled(Component)')).toHaveLength(3);
     });
 
-    it('should render a Logo component', () => {
+    it('should render a SignInHeader component', () => {
         const wrapper = shallow(<SignIn/>);
 
-        expect(wrapper.find('Logo')).toHaveLength(1);
+        expect(wrapper.find('Connect(SignInHeader)')).toHaveLength(1);
     });
 
     it('should render a SignInForm component', () => {
         const wrapper = shallow(<SignIn/>);
 
-        expect(wrapper.find('SignInForm')).toHaveLength(1);
+        expect(wrapper.find('Connect(SignInForm)')).toHaveLength(1);
     });
 
     it('should render a Text component', () => {
