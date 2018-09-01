@@ -10,8 +10,8 @@ export const Wrapper = styled(AnimatableView)`
     align-items: center;
     
     ${({hide}) => (hide) && `
-        height: 0px;
-        width: 0px;
+        height: 0;
+        width: 0;
     `}
 `;
 
