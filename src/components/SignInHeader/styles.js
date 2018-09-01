@@ -15,7 +15,7 @@ export const Wrapper = styled(AnimatableView)`
     `}
 `;
 
-export const Gradient = styled(BrandGradient)`
+export const StyledBrandGradient = styled(BrandGradient)`
     flex: 1;
     align-self: stretch;
     justify-content: center;

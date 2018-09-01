@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import {showHeader, hideHeader} from '../../actions/header';
 
-import {Wrapper, Gradient} from './styles';
+import {Wrapper, StyledBrandGradient} from './styles';
 import Logo from '../Logo';
 
 export class SignInHeader extends React.Component {
@@ -88,9 +88,9 @@ export class SignInHeader extends React.Component {
 
         return (
             <Wrapper innerRef={this.view} useNativeDriver={true} hide={hide}>
-                <Gradient>
+                <StyledBrandGradient>
                     <Logo fill='#FFFFFF' height='100' width='100'/>
-                </Gradient>
+                </StyledBrandGradient>
             </Wrapper>
         );
     }
