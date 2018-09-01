@@ -1,4 +1,4 @@
-export const zoomInScreen = {
+export const zoomIn = {
     0: {
         opacity: 0,
         scale: 0.70
