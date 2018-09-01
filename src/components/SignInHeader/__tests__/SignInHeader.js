@@ -24,13 +24,13 @@ describe('Component: SignInHeader', () => {
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should render a Wrapper component', () => {
+    it('should render a Animatable component', () => {
         const wrapper = shallow(<SignInHeader {...minProps}/>);
 
         expect(wrapper.find('Styled(withAnimatable(Component))')).toHaveLength(1);
     });
 
-    it('should render a Gradient component', () => {
+    it('should render a BrandGradient component', () => {
         const wrapper = shallow(<SignInHeader {...minProps}/>);
 
         expect(wrapper.find('Styled(BrandGradient)')).toHaveLength(1);
