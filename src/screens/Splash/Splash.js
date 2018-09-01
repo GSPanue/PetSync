@@ -2,7 +2,7 @@ import React from 'react';
 import {InteractionManager, BackHandler} from 'react-native';
 import PropTypes from 'prop-types';
 
-import styles from './styles';
+import {Wrapper} from './styles';
 import withZoom from '../../components/withZoom';
 import Logo from '../../components/Logo';
 
@@ -53,13 +53,11 @@ export class Splash extends React.Component {
 
     render() {
         return (
-            <Logo height='125' width='125'/>
+            <Wrapper>
+                <Logo height='125' width='125'/>
+            </Wrapper>
         );
     }
 }
 
-const zoomProps = {
-    style: styles.container
-};
-
-export default withZoom({...zoomProps})(Splash);
+export default withZoom(Splash);

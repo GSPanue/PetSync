@@ -17,6 +17,12 @@ describe('Component: Splash', () => {
         expect(wrapper).toHaveLength(1);
     });
 
+    it('should render a View component', () => {
+        const wrapper = shallow(<Splash {...minProps}/>);
+
+        expect(wrapper.find('Styled(Component)')).toHaveLength(1);
+    });
+
     it('should render a Logo component', () => {
         const wrapper = shallow(<Splash {...minProps}/>);
 
