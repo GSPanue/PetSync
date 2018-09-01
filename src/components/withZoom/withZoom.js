@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as Animatable from 'react-native-animatable';
 
 import {hasCallback} from '../../helpers';
-import {zoomInScreen} from '../../config/animations';
 
-Animatable.initializeRegistryWithDefinitions({
-    zoomIn: zoomInScreen
-});
+import {Wrapper} from './styles';
 
-const withZoom = (props) => (WrappedComponent) => {
+const withZoom = (Component) => {
     return class Zoom extends React.Component {
         static propTypes = {
             navigation: PropTypes.object
@@ -29,7 +25,7 @@ const withZoom = (props) => (WrappedComponent) => {
         zoomOutScreen(callback) {
             const {zoomOut} = this.view.current;
 
-            // Zooms out WrappedComponent
+            // Zooms out Component
             zoomOut(300).done(() => {
                 (hasCallback(callback)) && callback();
             });
@@ -37,21 +33,19 @@ const withZoom = (props) => (WrappedComponent) => {
 
         render() {
             const {navigation} = this.props;
-            const {style} = props;
 
             return (
-                <Animatable.View
-                    ref={this.view}
+                <Wrapper
+                    innerRef={this.view}
                     animation='zoomIn'
                     duration={200}
                     useNativeDriver={true}
-                    style={[style]}
                 >
-                    <WrappedComponent
+                    <Component
                         navigation={navigation}
                         zoomOutScreen={this.zoomOutScreen}
                     />
-                </Animatable.View>
+                </Wrapper>
             );
         }
     }

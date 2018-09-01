@@ -6,7 +6,7 @@ import withZoom from '../withZoom';
 
 describe('Component: withZoom', () => {
     const Component = () => <View/>;
-    const WrappedComponent = withZoom({style: 0})(Component);
+    const WrappedComponent = withZoom(Component);
 
     it('should render without crashing', () => {
         const wrapper = shallow(<WrappedComponent/>);
@@ -14,10 +14,16 @@ describe('Component: withZoom', () => {
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should pass style as props to the Animatable.View component', () => {
+    it('should render a Animatable component', () => {
         const wrapper = shallow(<WrappedComponent/>);
 
-        expect(wrapper.find('withAnimatable(Component)').props().style).toBeDefined();
+        expect(wrapper.find('Styled(withAnimatable(Component))')).toHaveLength(1);
+    });
+
+    it('should render a Component component', () => {
+        const wrapper = shallow(<WrappedComponent/>);
+
+        expect(wrapper.find('Component')).toHaveLength(1);
     });
 
     describe('Method: shouldComponentUpdate', () => {
