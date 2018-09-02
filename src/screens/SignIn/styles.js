@@ -7,10 +7,10 @@ export const Wrapper = styled.View`
 export const FormWrapper = styled.View`
     flex: 4;
     align-self: stretch;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    margin-left: 30;
-    margin-right: 30;
+    margin-left: 50;
+    margin-right: 50;
 `;
 
 export const Footer = styled.View`
