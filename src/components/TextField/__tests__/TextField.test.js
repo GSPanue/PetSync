@@ -18,28 +18,28 @@ describe('Component: TextField', () => {
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should render a Form component', () => {
+    it('should render a View component', () => {
         const wrapper = shallow(<TextField {...minProps}/>);
 
-        expect(wrapper.find('Styled(Form)')).toHaveLength(1);
+        expect(wrapper.find('Styled(Component)')).toHaveLength(1);
     });
 
     it('should render a Item component', () => {
         const wrapper = shallow(<TextField {...minProps}/>);
 
-        expect(wrapper.find('Styled(Item)')).toHaveLength(1);
+        expect(wrapper.find('Styled(Styled(Item))')).toHaveLength(1);
     });
 
     it('should render a Label component', () => {
         const wrapper = shallow(<TextField {...minProps}/>);
 
-        expect(wrapper.find('Styled(Label)')).toHaveLength(1);
+        expect(wrapper.find('Styled(Styled(Label))')).toHaveLength(1);
     });
 
     it('should render a Input component', () => {
         const wrapper = shallow(<TextField {...minProps}/>);
 
-        expect(wrapper.find('Styled(Input)')).toHaveLength(1);
+        expect(wrapper.find('Styled(Styled(Input))')).toHaveLength(1);
     });
 
     it('should have props for name, label, value, setFieldValue, and setFieldTouched', () => {
@@ -129,82 +129,6 @@ describe('Component: TextField', () => {
             expect(setFieldTouched).toHaveBeenCalledTimes(0);
             instance.handleBlur();
             expect(setFieldTouched).toHaveBeenCalledTimes(1);
-        });
-    });
-
-    describe('Method: getExtraStyles', () => {
-        it('should return an object for a touched text field', () => {
-            const wrapper = shallow(<TextField {...minProps} touched={true}/>);
-            const instance = wrapper.instance();
-
-            const expectedResult = {
-                item: {
-                    borderColor: '#5571B6'
-                },
-                label: {
-                    color: '#5571B6'
-                },
-                input: {}
-            };
-
-            expect(instance.getExtraStyles()).toEqual(expectedResult);
-        });
-
-        it('should return an object for an untouched text field with no input', () => {
-            const wrapper = shallow(<TextField {...minProps} touched={false}/>);
-            const instance = wrapper.instance();
-
-            const expectedResult = {
-                item: {
-                    borderColor: '#CCCCCC'
-                },
-                label: {
-                    color: '#CCCCCC'
-                },
-                input: {
-                    color: '#CCCCCC'
-                }
-            };
-
-            expect(instance.getExtraStyles()).toEqual(expectedResult);
-        });
-
-        it('should return an object for an untouched text field with input', () => {
-            const wrapper = shallow(<TextField {...minProps} value='value' touched={false}/>);
-            const instance = wrapper.instance();
-
-            const expectedResult = {
-                item: {
-                    borderColor: '#CCCCCC'
-                },
-                label: {
-                    color: '#CCCCCC'
-                },
-                input: {
-                    color: '#8E8E8E'
-                }
-            };
-
-            expect(instance.getExtraStyles()).toEqual(expectedResult);
-        });
-
-        it('should return an object for a text field with an error', () => {
-            const wrapper = shallow(<TextField {...minProps} error='error'/>);
-            const instance = wrapper.instance();
-
-            const expectedResult = {
-                item: {
-                    borderColor: '#D24C4C'
-                },
-                label: {
-                    color: '#D24C4C'
-                },
-                input: {
-                    color: '#CCCCCC'
-                }
-            };
-
-            expect(instance.getExtraStyles()).toEqual(expectedResult);
         });
     });
 });

@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Form, Item, Input, Label} from 'native-base';
 
-import styles from './styles';
+import {Wrapper, StyledItem, StyledLabel, StyledInput} from './styles';
 
 class TextField extends React.Component {
     static propTypes = {
@@ -24,7 +23,6 @@ class TextField extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
-        this.getExtraStyles = this.getExtraStyles.bind(this);
     }
 
     shouldComponentUpdate(nextProps) {
@@ -52,63 +50,27 @@ class TextField extends React.Component {
         setFieldTouched(name, false);
     };
 
-    getExtraStyles() {
-        const {value, touched, error} = this.props;
-        const extraStyles = {};
-
-        if (touched) {
-            Object.assign(extraStyles, {
-                item: {
-                    borderColor: '#5571B6'
-                },
-                label: {
-                    color: '#5571B6'
-                },
-                input: {}
-            });
-
-            return extraStyles;
-        }
-
-        Object.assign(extraStyles, {
-            item: {
-                borderColor: (error) ? '#D24C4C' : '#CCCCCC'
-            },
-            label: {
-                color: (error) ? '#D24C4C' : '#CCCCCC'
-            },
-            input: {
-                color: (value) ? '#8E8E8E' : '#CCCCCC'
-            }
-        });
-
-        return extraStyles;
-    }
-
     render() {
-        const {label, value, autoCorrect, keyboardType, secureTextEntry, error} = this.props;
-        const {getExtraStyles} = this;
-
-        const extraStyles = getExtraStyles();
+        const {label, value, touched, autoCorrect, keyboardType, secureTextEntry, error} = this.props;
+        const inputProps = {touched, autoCorrect, keyboardType, secureTextEntry};
+        const styleProps = {touched, error};
 
         return (
-            <Form style={styles.form}>
-                <Item floatingLabel style={[styles.item, extraStyles.item]}>
-                    <Label style={[styles.label, extraStyles.label]}>{label}</Label>
-                    <Input
+            <Wrapper>
+                <StyledItem stackedLabel {...styleProps}>
+                    <StyledLabel {...styleProps}>{label}</StyledLabel>
+                    <StyledInput
+                        placeholder={label}
                         defaultValue={value}
                         autoCapitalize='none'
-                        autoCorrect={autoCorrect}
-                        keyboardType={keyboardType}
-                        secureTextEntry={secureTextEntry}
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
                         onChangeText={this.handleChange}
-                        style={[styles.input, extraStyles.input]}
+                        {...inputProps}
                     />
-                </Item>
+                </StyledItem>
                 {/* <--- Add Error Message Component --> */}
-            </Form>
+            </Wrapper>
         );
     }
 }
