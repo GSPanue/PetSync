@@ -33,7 +33,7 @@ export default {
 
   // Button
   btnFontFamily: platform === "ios" ? "System" : "Roboto_medium",
-  btnDisabledBg: "#b5b5b5",
+  btnDisabledBg: "#CCCCCC",
   buttonPadding: 6,
   get btnPrimaryBg() {
     return this.brandPrimary;
@@ -177,12 +177,12 @@ export default {
   inputBorderColor: "#CCCCCC",
   inputSuccessBorderColor: "#2b8339",
   inputErrorBorderColor: "#ed2f2f",
-  inputHeightBase: 40,
+  inputHeightBase: 50,
   get inputColor() {
     return this.textColor;
   },
   get inputColorPlaceholder() {
-    return "#575757";
+    return "#EFEFEF";
   },
 
   // Line Height
@@ -257,7 +257,7 @@ export default {
   borderWidth: 1 / PixelRatio.getPixelSizeForLayoutSize(1),
   contentPadding: 10,
   dropdownLinkColor: "#414142",
-  inputLineHeight: 24,
+  inputLineHeight: 26,
   deviceWidth,
   deviceHeight,
   isIphoneX,
