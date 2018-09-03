@@ -31,9 +31,9 @@ export class SignInHeader extends React.Component {
         const {hasOpenedKeyboard: currentHasOpenedKeyboard} = this.props;
         const {hasOpenedKeyboard: nextHasOpenedKeyboard} = nextProps;
 
-        const shouldHideHeader = (currentHasOpenedKeyboard !== nextHasOpenedKeyboard);
+        const hasChangedKeyboardState = (currentHasOpenedKeyboard !== nextHasOpenedKeyboard);
 
-        if (shouldHideHeader && isActive) {
+        if (hasChangedKeyboardState && isActive) {
             const {hasOpenedKeyboard} = nextProps;
             const {slideOut, slideIn} = this;
 
@@ -64,11 +64,8 @@ export class SignInHeader extends React.Component {
 
     slideOut() {
         const {hideHeader} = this.props;
-        const {slideOutUp} = this.view.current;
 
-        slideOutUp(100).done(() => {
-            hideHeader();
-        });
+        hideHeader();
     }
 
     handleAppStateChange(nextAppState) {
@@ -84,7 +81,7 @@ export class SignInHeader extends React.Component {
     }
 
     render() {
-       const {shouldHideHeader: hide} = this.props;
+        const {shouldHideHeader: hide} = this.props;
 
         return (
             <Wrapper innerRef={this.view} useNativeDriver={true} hide={hide}>

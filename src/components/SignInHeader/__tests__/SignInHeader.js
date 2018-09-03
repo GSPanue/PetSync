@@ -166,43 +166,10 @@ describe('Component: SignInHeader', () => {
     });
 
     describe('Method: slideOut', () => {
-        it('should call slideOutUp', () => {
-            const wrapper = shallow(<SignInHeader {...minProps}/>);
-            const instance = wrapper.instance();
-
-            const slideOutUp = jest.fn(() => {
-                return {
-                    done: jest.fn()
-                }
-            });
-
-            instance.view = {
-                current: {
-                    slideOutUp: slideOutUp
-                }
-            };
-
-            expect(slideOutUp).toHaveBeenCalledTimes(0);
-            instance.slideOut();
-            expect(slideOutUp).toHaveBeenCalledTimes(1);
-        });
-
         it('should call hideHeader', () => {
             const hideHeader = jest.fn();
             const wrapper = shallow(<SignInHeader {...minProps} hideHeader={hideHeader}/>);
             const instance = wrapper.instance();
-
-            instance.view = {
-                current: {
-                    slideOutUp: jest.fn(() => {
-                        return {
-                            done: jest.fn((callback) => {
-                                callback();
-                            })
-                        }
-                    })
-                }
-            };
 
             expect(hideHeader).toHaveBeenCalledTimes(0);
             instance.slideOut();
