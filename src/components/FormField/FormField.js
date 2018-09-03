@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Wrapper, StyledItem, StyledLabel, StyledInput} from './styles';
 
-class TextField extends React.Component {
+class FormField extends React.Component {
     static propTypes = {
         inputRef: PropTypes.object,
         name: PropTypes.string.isRequired,
@@ -88,4 +88,4 @@ class TextField extends React.Component {
     }
 }
 
-export default TextField;
+export default FormField;
