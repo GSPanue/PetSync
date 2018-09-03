@@ -7,7 +7,7 @@ import BrandGradient from '../BrandGradient';
 describe('Component: BrandGradient', () => {
     const minProps = {
         children: <Text/>,
-        style: [0]
+        style: {}
     };
 
     it('should render without crashing', () => {
