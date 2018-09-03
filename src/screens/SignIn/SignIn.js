@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text} from 'react-native';
 
-import {Wrapper, FormWrapper, Footer} from './styles';
+import {Wrapper, Footer} from './styles';
 import withZoom from '../../components/withZoom';
 import SignInHeader from '../../components/SignInHeader';
 import SignInForm from '../../components/SignInForm';
@@ -15,9 +15,7 @@ export class SignIn extends React.Component {
         return (
             <Wrapper>
                 <SignInHeader/>
-                <FormWrapper>
-                    <SignInForm/>
-                </FormWrapper>
+                <SignInForm/>
                 <Footer>
                     <Text>Don't have an account? Register</Text>
                 </Footer>
