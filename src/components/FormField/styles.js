@@ -21,6 +21,7 @@ export const StyledLabel = styled(Label)`
 `;
 
 export const StyledInput = styled(Input)`
+    width: 100%;
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
