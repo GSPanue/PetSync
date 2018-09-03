@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {hasCallback} from '../../helpers';
+
 import {Wrapper, StyledItem, StyledLabel, StyledInput} from './styles';
 
 class FormField extends React.Component {
@@ -16,7 +18,7 @@ class FormField extends React.Component {
         secureTextEntry: PropTypes.bool,
         blurOnSubmit: PropTypes.bool,
         error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
-        onSubmitEditing: PropTypes.func,
+        handleSubmitEditing: PropTypes.func,
         setFieldValue: PropTypes.func.isRequired,
         setFieldTouched: PropTypes.func.isRequired
     };
@@ -34,6 +36,7 @@ class FormField extends React.Component {
     constructor() {
         super();
 
+        this.onSubmitEditing = this.onSubmitEditing.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
@@ -44,6 +47,12 @@ class FormField extends React.Component {
         const {touched: nextTouched} = nextProps;
 
         return (currentTouched !== nextTouched);
+    }
+
+    onSubmitEditing() {
+        const {name, handleSubmitEditing} = this.props;
+
+        (hasCallback(handleSubmitEditing)) && handleSubmitEditing(name);
     }
 
     handleChange(text) {
@@ -65,7 +74,8 @@ class FormField extends React.Component {
     };
 
     render() {
-        const {name, setFieldValue, setFieldTouched, inputRef, label, error, ...rest} = this.props;
+        const {name, handleSubmitEditing, setFieldValue, setFieldTouched, ...props} = this.props;
+        const {inputRef, label, error, ...rest} = props;
         const {touched} = rest, styleProps = {touched, error};
 
         return (
@@ -79,6 +89,7 @@ class FormField extends React.Component {
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
                         onChangeText={this.handleChange}
+                        onSubmitEditing={this.onSubmitEditing}
                         {...rest}
                     />
                 </StyledItem>
