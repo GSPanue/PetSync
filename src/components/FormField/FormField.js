@@ -5,16 +5,30 @@ import {Wrapper, StyledItem, StyledLabel, StyledInput} from './styles';
 
 class TextField extends React.Component {
     static propTypes = {
+        inputRef: PropTypes.object,
         name: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired,
-        touched: PropTypes.bool,
+        defaultValue: PropTypes.string.isRequired,
+        touched: PropTypes.bool.isRequired,
+        returnKeyType: PropTypes.string,
         autoCorrect: PropTypes.bool,
         keyboardType: PropTypes.string,
         secureTextEntry: PropTypes.bool,
-        error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+        blurOnSubmit: PropTypes.bool,
+        error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
+        onSubmitEditing: PropTypes.func,
         setFieldValue: PropTypes.func.isRequired,
         setFieldTouched: PropTypes.func.isRequired
+    };
+
+    static defaultProps = {
+        touched: false,
+        returnKeyType: 'done',
+        autoCorrect: false,
+        keyboardType: 'default',
+        secureTextEntry: false,
+        blurOnSubmit: false,
+        error: false
     };
 
     constructor() {
@@ -51,22 +65,21 @@ class TextField extends React.Component {
     };
 
     render() {
-        const {label, value, touched, autoCorrect, keyboardType, secureTextEntry, error} = this.props;
-        const inputProps = {touched, autoCorrect, keyboardType, secureTextEntry};
-        const styleProps = {touched, error};
+        const {name, setFieldValue, setFieldTouched, inputRef, label, error, ...rest} = this.props;
+        const {touched} = rest, styleProps = {touched, error};
 
         return (
             <Wrapper>
                 <StyledItem stackedLabel {...styleProps}>
                     <StyledLabel {...styleProps}>{label}</StyledLabel>
                     <StyledInput
+                        ref={inputRef}
                         placeholder={label}
-                        defaultValue={value}
                         autoCapitalize='none'
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
                         onChangeText={this.handleChange}
-                        {...inputProps}
+                        {...rest}
                     />
                 </StyledItem>
                 {/* <--- Add Error Message Component --> */}

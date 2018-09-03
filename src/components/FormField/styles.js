@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import {Item, Label, Input} from 'native-base';
 
 export const Wrapper = styled.View`
-    width: 95%;
-    margin-bottom: 0;
+    align-self: stretch;
+    margin-bottom: 20;
 `;
 
 export const StyledItem = styled(Item)`
@@ -21,7 +21,6 @@ export const StyledLabel = styled(Label)`
 `;
 
 export const StyledInput = styled(Input)`
-    width: 100%;
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
