@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.BV.LinearGradient.LinearGradientPackage;
+import iyegoroff.RNTextGradient.RNTextGradientPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -27,7 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new SvgPackage(),
-          new LinearGradientPackage()
+          new LinearGradientPackage(),
+          new RNTextGradientPackage()
       );
     }
 
