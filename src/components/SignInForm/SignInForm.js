@@ -10,7 +10,7 @@ import {keyboardOpened, keyboardClosed} from '../../actions';
 
 import {Wrapper, StyledTextButton} from './styles';
 import FormField from '../FormField';
-import SubmitButton from '../SubmitButton';
+import GradientButton from '../GradientButton';
 
 export class SignInForm extends React.Component {
     static propTypes = {
@@ -109,7 +109,7 @@ export class SignInForm extends React.Component {
                     password: Yup.string().required('You can\'t leave this field empty')
                 })}
                 onSubmit={this.handleSubmit}
-                render={({values, touched, setFieldValue, setFieldTouched, errors, handleSubmit}) => (
+                render={({values, touched, setFieldValue, setFieldTouched, errors, handleSubmit, isValid}) => (
                     <Wrapper hasOpenedKeyboard={hasOpenedKeyboard}>
                         <FormField
                             inputRef={this.emailAddress}
@@ -138,11 +138,9 @@ export class SignInForm extends React.Component {
                             title='Forgot password?'
                             onPress={this.handleForgotPasswordPress}
                         />
-                        <SubmitButton
+                        <GradientButton
                             title='Sign In'
-                            width='100%'
-                            disabled={true}
-                            submit={handleSubmit}
+                            disabled={!isValid}
                         />
                     </Wrapper>
                 )}
