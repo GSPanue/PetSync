@@ -75,8 +75,7 @@ class FormField extends React.Component {
 
     render() {
         const {name, handleSubmitEditing, setFieldValue, setFieldTouched, ...props} = this.props;
-        const {inputRef, label, error, ...rest} = props;
-        const {touched} = rest, styleProps = {touched, error};
+        const {inputRef, label, touched, error, ...rest} = props, styleProps = {touched, error};
 
         return (
             <Wrapper>

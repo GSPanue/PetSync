@@ -27,7 +27,5 @@ export const StyledInput = styled(Input)`
     padding-top: 0;
     padding-bottom: 0;
     fontSize: 17;
-    ${({touched, defaultValue}) => (!touched && defaultValue) && `
-        color: #8E8E8E;
-    `}
+    color: #8E8E8E;
 `;
