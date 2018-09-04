@@ -11,13 +11,13 @@ export const StyledItem = styled(Item)`
     margin-left: 0;
     margin-right: 0;
     ${({touched, error}) => (touched || error) && `
-        border-color: ${(touched) ? `#5571B6` : `#D24C4C`};
+        border-color: ${(touched) ? `#D1A5CC` : `#D24C4C`};
     `}
 `;
 
 export const StyledLabel = styled(Label)`
     padding-vertical: 0;
-    color: ${({touched, error}) => (touched) ? `#5571B6` : (error) ? `#D24C4C` : `#CCCCCC`};
+    color: ${({touched, error}) => (touched) ? `#D1A5CC` : (error) ? `#D24C4C` : `#CCCCCC`};
 `;
 
 export const StyledInput = styled(Input)`
