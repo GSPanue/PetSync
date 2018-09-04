@@ -10,10 +10,10 @@ describe('Component: SignIn', () => {
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should render three View components', () => {
+    it('should render two View components', () => {
         const wrapper = shallow(<SignIn/>);
 
-        expect(wrapper.find('Styled(Component)')).toHaveLength(3);
+        expect(wrapper.find('Styled(Component)')).toHaveLength(2);
     });
 
     it('should render a SignInHeader component', () => {
