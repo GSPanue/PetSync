@@ -1,3 +1,3 @@
-import GradientButton from 'GradientButton';
+import GradientButton from './GradientButton';
 
 export default GradientButton;
