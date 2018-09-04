@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {hasCallback} from '../../helpers';
+import is from 'is_js';
 
 import {Wrapper, StyledItem, StyledLabel, StyledInput} from './styles';
 
@@ -52,7 +52,7 @@ class FormField extends React.Component {
     onSubmitEditing() {
         const {name, handleSubmitEditing} = this.props;
 
-        (hasCallback(handleSubmitEditing)) && handleSubmitEditing(name);
+        (is.function(handleSubmitEditing)) && handleSubmitEditing(name);
     }
 
     handleChange(text) {
