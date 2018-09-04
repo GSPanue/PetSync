@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {hasCallback} from '../../helpers';
+import is from 'is_js';
 
 import {Wrapper} from './styles';
 
@@ -27,7 +27,7 @@ const withZoom = (Component) => {
 
             // Zooms out Component
             zoomOut(300).done(() => {
-                (hasCallback(callback)) && callback();
+                (is.function(callback)) && callback();
             });
         }
 
