@@ -6,14 +6,14 @@ import GradientButton from '../GradientButton';
 describe('Component: GradientButton', () => {
     const minProps = {
         title: 'title',
-        disabled: false
+        disabled: false,
+        onPress: () => {}
     };
 
     it('should render without crashing', () => {
         const wrapper = shallow(<GradientButton {...minProps}/>);
 
         expect(wrapper).toHaveLength(1);
-        console.log(wrapper.debug());
     });
 
     it('should render a TouchableOpacity component', () => {
@@ -40,11 +40,33 @@ describe('Component: GradientButton', () => {
         expect(wrapper.find('Styled(BrandGradient)')).toHaveLength(0);
     });
 
-    it('should have props for title and disabled', () => {
+    it('should have props for title, disabled, and onPress', () => {
         const wrapper = shallow(<GradientButton {...minProps}/>);
         const instance = wrapper.instance();
 
         expect(instance.props.title).toBeDefined();
         expect(instance.props.disabled).toBeDefined();
+        expect(instance.props.onPress).toBeDefined();
+    });
+
+    it('should call handlePress when TouchableOpacity is pressed', () => {
+        const spy = spyOn(GradientButton.prototype, 'handlePress');
+        const wrapper = shallow(<GradientButton {...minProps}/>);
+
+        expect(spy).toHaveBeenCalledTimes(0);
+        wrapper.find('Styled(TouchableOpacity)').first().props().onPress();
+        expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    describe('Method: handlePress', () => {
+        it('should call onPress', () => {
+            const onPress = jest.fn();
+            const wrapper = shallow(<GradientButton {...minProps} onPress={onPress}/>);
+            const instance = wrapper.instance();
+
+            expect(onPress).toHaveBeenCalledTimes(0);
+            instance.handlePress();
+            expect(onPress).toHaveBeenCalledTimes(1);
+        });
     });
 });
