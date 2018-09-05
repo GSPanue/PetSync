@@ -3,3 +3,6 @@ export const HIDE_HEADER = 'HIDE_HEADER';
 
 export const KEYBOARD_OPENED = 'KEYBOARD_OPENED';
 export const KEYBOARD_CLOSED = 'KEYBOARD_CLOSED';
+
+export const SHOW_OVERLAY = 'SHOW_OVERLAY';
+export const HIDE_OVERLAY = 'HIDE_OVERLAY';
