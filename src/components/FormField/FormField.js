@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import is from 'is_js';
 
 import {Wrapper, StyledItem, StyledLabel, StyledInput} from './styles';
+import ErrorMessage from '../ErrorMessage';
 
 class FormField extends React.Component {
     static propTypes = {
@@ -17,7 +18,7 @@ class FormField extends React.Component {
         keyboardType: PropTypes.string,
         secureTextEntry: PropTypes.bool,
         blurOnSubmit: PropTypes.bool,
-        error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
+        error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
         onSubmitEditing: PropTypes.func,
         setFieldValue: PropTypes.func.isRequired,
         setFieldTouched: PropTypes.func.isRequired
@@ -76,9 +77,10 @@ class FormField extends React.Component {
     render() {
         const {name, onSubmitEditing, setFieldValue, setFieldTouched, ...props} = this.props;
         const {inputRef, label, touched, error, ...rest} = props, styleProps = {touched, error};
+        const shouldShowErrorMessage = (error && !touched);
 
         return (
-            <Wrapper>
+            <Wrapper {...styleProps}>
                 <StyledItem stackedLabel {...styleProps}>
                     <StyledLabel {...styleProps}>{label}</StyledLabel>
                     <StyledInput
@@ -92,7 +94,7 @@ class FormField extends React.Component {
                         {...rest}
                     />
                 </StyledItem>
-                {/* <--- Add Error Message Component --> */}
+                {(shouldShowErrorMessage) && <ErrorMessage message={error}/>}
             </Wrapper>
         );
     }

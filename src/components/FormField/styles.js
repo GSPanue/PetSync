@@ -4,7 +4,7 @@ import {Item, Label, Input} from 'native-base';
 
 export const Wrapper = styled.View`
     align-self: stretch;
-    margin-bottom: 20;
+    margin-bottom: ${({touched, error}) => (error && !touched) ? `10` : `20`};
 `;
 
 export const StyledItem = styled(Item)`
