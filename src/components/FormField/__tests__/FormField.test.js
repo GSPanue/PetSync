@@ -44,6 +44,30 @@ describe('Component: FormField', () => {
         expect(wrapper.find('Styled(Styled(Input))')).toHaveLength(1);
     });
 
+    it('should render a ErrorMessage component when error is a non-empty string and touched is false', () => {
+        const wrapper = shallow(<FormField {...minProps} error='error' touched={false}/>);
+
+        expect(wrapper.find('ErrorMessage')).toHaveLength(1);
+    });
+
+    it('should not render a ErrorMessage component when error is a non-empty string and touched is true', () => {
+        const wrapper = shallow(<FormField {...minProps} error='error' touched={true}/>);
+
+        expect(wrapper.find('ErrorMessage')).toHaveLength(0);
+    });
+
+    it('should not render a ErrorMessage component when error and touched are false', () => {
+        const wrapper = shallow(<FormField {...minProps} error={false} touched={false}/>);
+
+        expect(wrapper.find('ErrorMessage')).toHaveLength(0);
+    });
+
+    it('should not render a ErrorMessage component when error is false and touched is true', () => {
+        const wrapper = shallow(<FormField {...minProps} error={false} touched={true}/>);
+
+        expect(wrapper.find('ErrorMessage')).toHaveLength(0);
+    });
+
     it('should have props for name, label, defaultValue, touched, error, setFieldValue, and setFieldTouched', () => {
         const wrapper = shallow(<FormField {...minProps}/>);
         const instance = wrapper.instance();
