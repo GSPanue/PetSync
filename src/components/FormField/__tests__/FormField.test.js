@@ -113,15 +113,15 @@ describe('Component: FormField', () => {
         });
     });
 
-    describe('Method: onSubmitEditing', () => {
-        it('should call handleSubmitEditing', () => {
-            const handleSubmitEditing = jest.fn();
-            const wrapper = shallow(<FormField {...minProps} handleSubmitEditing={handleSubmitEditing}/>);
+    describe('Method: handleSubmitEditing', () => {
+        it('should call onSubmitEditing', () => {
+            const onSubmitEditing = jest.fn();
+            const wrapper = shallow(<FormField {...minProps} onSubmitEditing={onSubmitEditing}/>);
             const instance = wrapper.instance();
 
-            expect(handleSubmitEditing).toHaveBeenCalledTimes(0);
-            instance.onSubmitEditing();
-            expect(handleSubmitEditing).toHaveBeenCalledTimes(1);
+            expect(onSubmitEditing).toHaveBeenCalledTimes(0);
+            instance.handleSubmitEditing();
+            expect(onSubmitEditing).toHaveBeenCalledTimes(1);
         });
     });
 

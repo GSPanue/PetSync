@@ -18,7 +18,7 @@ class FormField extends React.Component {
         secureTextEntry: PropTypes.bool,
         blurOnSubmit: PropTypes.bool,
         error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
-        handleSubmitEditing: PropTypes.func,
+        onSubmitEditing: PropTypes.func,
         setFieldValue: PropTypes.func.isRequired,
         setFieldTouched: PropTypes.func.isRequired
     };
@@ -36,7 +36,7 @@ class FormField extends React.Component {
     constructor() {
         super();
 
-        this.onSubmitEditing = this.onSubmitEditing.bind(this);
+        this.handleSubmitEditing = this.handleSubmitEditing.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
@@ -49,10 +49,10 @@ class FormField extends React.Component {
         return (currentTouched !== nextTouched);
     }
 
-    onSubmitEditing() {
-        const {name, handleSubmitEditing} = this.props;
+    handleSubmitEditing() {
+        const {name, onSubmitEditing} = this.props;
 
-        (is.function(handleSubmitEditing)) && handleSubmitEditing(name);
+        (is.function(onSubmitEditing)) && onSubmitEditing(name);
     }
 
     handleChange(text) {
@@ -74,7 +74,7 @@ class FormField extends React.Component {
     };
 
     render() {
-        const {name, handleSubmitEditing, setFieldValue, setFieldTouched, ...props} = this.props;
+        const {name, onSubmitEditing, setFieldValue, setFieldTouched, ...props} = this.props;
         const {inputRef, label, touched, error, ...rest} = props, styleProps = {touched, error};
 
         return (
@@ -88,7 +88,7 @@ class FormField extends React.Component {
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
                         onChangeText={this.handleChange}
-                        onSubmitEditing={this.onSubmitEditing}
+                        onSubmitEditing={this.handleSubmitEditing}
                         {...rest}
                     />
                 </StyledItem>
