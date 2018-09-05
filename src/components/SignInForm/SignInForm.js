@@ -105,8 +105,8 @@ export class SignInForm extends React.Component {
             <Formik
                 initialValues={{email: '', password: ''}}
                 validationSchema={Yup.object().shape({
-                    email: Yup.string().required('You can\'t leave this field empty'),
-                    password: Yup.string().required('You can\'t leave this field empty')
+                    email: Yup.string().required(),
+                    password: Yup.string().required()
                 })}
                 onSubmit={this.handleSubmit}
                 render={({values, touched, setFieldValue, setFieldTouched, errors, handleSubmit, isValid, isSubmitting}) => (
