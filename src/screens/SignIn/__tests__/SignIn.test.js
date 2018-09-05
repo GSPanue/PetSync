@@ -13,7 +13,7 @@ describe('Component: SignIn', () => {
     it('should render two View components', () => {
         const wrapper = shallow(<SignIn/>);
 
-        expect(wrapper.find('Styled(Component)')).toHaveLength(2);
+        expect(wrapper.find('Styled(Component)')).toHaveLength(1);
     });
 
     it('should render a SignInHeader component', () => {
@@ -28,10 +28,10 @@ describe('Component: SignIn', () => {
         expect(wrapper.find('Connect(SignInForm)')).toHaveLength(1);
     });
 
-    it('should render a Text component', () => {
+    it('should render a SignInFooter component', () => {
         const wrapper = shallow(<SignIn/>);
 
-        expect(wrapper.find('Text')).toHaveLength(1);
+        expect(wrapper.find('SignInFooter')).toHaveLength(1);
     });
 
     describe('Method: componentShouldUpdate', () => {
