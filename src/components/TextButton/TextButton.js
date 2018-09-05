@@ -11,16 +11,28 @@ class TextButton extends React.Component {
         onPress: PropTypes.func.isRequired
     };
 
+    constructor() {
+        super();
+
+        this.handlePress = this.handlePress.bind(this);
+    }
+
     shouldComponentUpdate() {
         return false;
     }
 
+    handlePress() {
+        const {onPress} = this.props;
+
+        onPress();
+    }
+
     render() {
-        const {title, style, onPress} = this.props;
+        const {title, style} = this.props;
 
         return (
             <Wrapper>
-                <TouchableOpacity activeOpacity={0.4} onPress={onPress}>
+                <TouchableOpacity activeOpacity={0.4} onPress={this.handlePress}>
                     <StyledView>
                         <Text style={style}>{title}</Text>
                     </StyledView>

@@ -6,6 +6,7 @@ import TextButton from '../TextButton';
 describe('Component: TextButton', () => {
     const minProps = {
         title: 'title',
+        style: {},
         onPress: () => {}
     };
 
@@ -33,22 +34,22 @@ describe('Component: TextButton', () => {
         expect(wrapper.find('Text')).toHaveLength(1);
     });
 
-    it('should have props for title, onPress, and style', () => {
-        const wrapper = shallow(<TextButton {...minProps} style={[]}/>);
+    it('should have props for title, style, and onPress', () => {
+        const wrapper = shallow(<TextButton {...minProps}/>);
         const instance = wrapper.instance();
 
         expect(instance.props.title).toBeDefined();
-        expect(instance.props.onPress).toBeDefined();
         expect(instance.props.style).toBeDefined();
+        expect(instance.props.onPress).toBeDefined();
     });
 
-    it('should call onPress when TouchableOpacity is pressed', () => {
-        const onPress = jest.fn();
-        const wrapper = shallow(<TextButton {...minProps} onPress={onPress}/>);
+    it('should call handlePress when TouchableOpacity is pressed', () => {
+        const spy = spyOn(TextButton.prototype, 'handlePress');
+        const wrapper = shallow(<TextButton {...minProps}/>);
 
-        expect(onPress).toHaveBeenCalledTimes(0);
+        expect(spy).toHaveBeenCalledTimes(0);
         wrapper.find('TouchableOpacity').first().props().onPress();
-        expect(onPress).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenCalledTimes(1);
     });
 
     describe('Method: shouldComponentUpdate', () => {
@@ -57,6 +58,18 @@ describe('Component: TextButton', () => {
             const instance = wrapper.instance();
 
             expect(instance.shouldComponentUpdate()).toEqual(false);
+        });
+    });
+
+    describe('Method: handlePress', () => {
+        it('should call onPress', () => {
+            const onPress = jest.fn();
+            const wrapper = shallow(<TextButton {...minProps} onPress={onPress}/>);
+            const instance = wrapper.instance();
+
+            expect(onPress).toHaveBeenCalledTimes(0);
+            instance.handlePress();
+            expect(onPress).toHaveBeenCalledTimes(1);
         });
     });
 });
