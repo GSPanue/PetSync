@@ -40,10 +40,10 @@ describe('Component: SignInForm', () => {
         expect(wrapper.find('Styled(TextButton)')).toHaveLength(1);
     });
 
-    it('should render a SubmitButton component', () => {
+    it('should render a GradientButton component', () => {
         const wrapper = shallow(<SignInForm {...minProps}/>).dive();
 
-        expect(wrapper.find('SubmitButton')).toHaveLength(1);
+        expect(wrapper.find('GradientButton')).toHaveLength(1);
     });
 
     describe('Method: shouldComponentUpdate', () => {

@@ -109,30 +109,30 @@ export class SignInForm extends React.Component {
                     password: Yup.string().required('You can\'t leave this field empty')
                 })}
                 onSubmit={this.handleSubmit}
-                render={({values, touched, setFieldValue, setFieldTouched, errors, handleSubmit, isValid}) => (
+                render={({values, touched, setFieldValue, setFieldTouched, errors, handleSubmit, isValid, isSubmitting}) => (
                     <Wrapper hasOpenedKeyboard={hasOpenedKeyboard}>
                         <FormField
                             inputRef={this.emailAddress}
                             name='email'
                             label='Email Address'
                             defaultValue={values.email}
-                            touched={touched.email}
+                            touched={touched.email && !isSubmitting}
                             returnKeyType='next'
                             keyboardType='email-address'
                             setFieldValue={setFieldValue}
                             setFieldTouched={setFieldTouched}
-                            handleSubmitEditing={this.handleSubmitEditing}
+                            onSubmitEditing={this.handleSubmitEditing}
                         />
                         <FormField
                             inputRef={this.password}
                             name='password'
                             label='Password'
                             defaultValue={values.password}
-                            touched={touched.password}
+                            touched={touched.password && !isSubmitting}
                             secureTextEntry={true}
                             setFieldValue={setFieldValue}
                             setFieldTouched={setFieldTouched}
-                            handleSubmitEditing={this.handleSubmitEditing}
+                            onSubmitEditing={this.handleSubmitEditing}
                         />
                         <StyledTextButton
                             title='Forgot password?'
@@ -141,6 +141,7 @@ export class SignInForm extends React.Component {
                         <GradientButton
                             title='Sign In'
                             disabled={!isValid}
+                            onPress={handleSubmit}
                         />
                     </Wrapper>
                 )}
