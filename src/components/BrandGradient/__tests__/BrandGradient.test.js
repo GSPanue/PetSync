@@ -16,6 +16,12 @@ describe('Component: BrandGradient', () => {
         expect(wrapper).toHaveLength(1);
     });
 
+    it('should render a LinearGradient component', () => {
+        const wrapper = shallow(<BrandGradient {...minProps}/>);
+
+        expect(wrapper.find('LinearGradient')).toHaveLength(1);
+    });
+
     it('should render its children', () => {
         const wrapper = shallow(<BrandGradient {...minProps}/>);
 
