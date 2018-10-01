@@ -16,6 +16,12 @@ describe('Component: SignIn', () => {
         expect(wrapper.find('Styled(Component)')).toHaveLength(1);
     });
 
+    it('should render a SpinnerOverlay component', () => {
+        const wrapper = shallow(<SignIn/>);
+
+        expect(wrapper.find('Connect(SpinnerOverlay)')).toHaveLength(1);
+    });
+
     it('should render a SignInHeader component', () => {
         const wrapper = shallow(<SignIn/>);
 
