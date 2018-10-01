@@ -7,7 +7,9 @@ describe('Component: SignInForm', () => {
     const minProps = {
         hasOpenedKeyboard: false,
         keyboardOpened: () => {},
-        keyboardClosed: () => {}
+        keyboardClosed: () => {},
+        showOverlay: () => {},
+        hideOverlay: () => {}
     };
 
     it('should render without crashing', () => {
@@ -68,6 +70,16 @@ describe('Component: SignInForm', () => {
 
             expect(instance.shouldComponentUpdate(nextProps)).toEqual(false);
         });
+    });
+
+    it('should have props for keyboardOpened, keyboardClosed, showOverlay, and hideOverlay', () => {
+        const wrapper = shallow(<SignInForm {...minProps}/>);
+        const instance = wrapper.instance();
+
+        expect(instance.props.keyboardOpened).toBeDefined();
+        expect(instance.props.keyboardClosed).toBeDefined();
+        expect(instance.props.showOverlay).toBeDefined();
+        expect(instance.props.hideOverlay).toBeDefined();
     });
 
     describe('Method: componentWillUnmount', () => {

@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 
-import {keyboardOpened, keyboardClosed} from '../../actions';
+import {keyboardOpened, keyboardClosed, showOverlay, hideOverlay} from '../../actions';
 
 import {Wrapper, StyledTextButton} from './styles';
 import FormField from '../FormField';
@@ -16,7 +16,9 @@ export class SignInForm extends React.Component {
     static propTypes = {
         hasOpenedKeyboard: PropTypes.bool.isRequired,
         keyboardOpened: PropTypes.func.isRequired,
-        keyboardClosed: PropTypes.func.isRequired
+        keyboardClosed: PropTypes.func.isRequired,
+        showOverlay: PropTypes.func.isRequired,
+        hideOverlay: PropTypes.func.isRequired
     };
 
     constructor() {
@@ -81,9 +83,19 @@ export class SignInForm extends React.Component {
     }
 
     handleSubmit(values) {
+        const {keyboardClosed, showOverlay, hideOverlay} = this.props;
+
+        keyboardClosed();
+        Keyboard.dismiss();
+        showOverlay();
+
         /**
          * ToDo: Handle form submission.
          */
+
+        setTimeout(() => {
+            hideOverlay();
+        }, 2000);
     }
 
     handleSubmitEditing(currentField) {
@@ -159,7 +171,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         keyboardOpened: () => dispatch(keyboardOpened()),
-        keyboardClosed: () => dispatch(keyboardClosed())
+        keyboardClosed: () => dispatch(keyboardClosed()),
+        showOverlay: () => dispatch(showOverlay()),
+        hideOverlay: () => dispatch(hideOverlay())
     }
 };
 
